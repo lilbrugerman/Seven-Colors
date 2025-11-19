@@ -217,7 +217,7 @@
       <div style="font-weight:700" id="cartTotal">Rp 0</div>
     </div>
     <div style="margin-top:12px;display:flex;gap:8px">
-      <button class="btn" onclick="window.location.href='checkout.html'">Checkout</button>
+      <button class="btn" onclick="goCheckout()">Checkout</button>
       <button class="ghost" onclick="closeSideCart()">Continue Shopping</button>
     </div>
     <div id="orderMsg" style="margin-top:8px;color:green;font-size:13px"></div>
@@ -648,6 +648,19 @@ renderCategories();
 applyFilters();
 updateCartUI();
 
+function goCheckout() {
+  // Ambil cart dari localStorage
+  const cart = JSON.parse(localStorage.getItem("mini_cart_v1")) || [];
+
+  if (cart.length === 0) {
+    alert("what r u buying, choose some items xp");
+    return;
+  }
+
+  // Jika ada isi cart → lanjut ke checkout
+  window.location.href = "checkout.html";
+}
+  
 /* UX niceties */
 document.addEventListener('click', (e)=>{
   const sidebar = document.getElementById('sidebar');
@@ -660,6 +673,7 @@ document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ document.getEl
 </script>
 </body>
 </html>
+
 
 
 
