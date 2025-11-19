@@ -3,34 +3,77 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Order Berhasil!</title>
-  <link rel="stylesheet" href="success.css" />
+  <title>ord3r SucceSS !!</title>
+
+  <style>
+    body {
+      background: black;
+      color: white;
+      font-family: "Courier New", monospace;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .box {
+      border: 3px solid red;
+      padding: 40px 60px;
+      text-align: center;
+      font-size: 32px;
+      line-height: 1.5;
+      animation: slideDown 0.6s ease-out;
+    }
+
+    @keyframes slideDown {
+      0% { transform: translateY(-200px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    .subtext {
+      font-size: 20px;
+      margin-top: 10px;
+      opacity: 0.7;
+    }
+
+    /* Flash red border */
+    @keyframes flash {
+      0% { border-color: #ff0000; }
+      50% { border-color: #ff5050; }
+      100% { border-color: #ff0000; }
+    }
+
+    .box {
+      animation: slideDown 0.8s ease-out, flash 1s infinite;
+    }
+
+    /* Auto return */
+  </style>
 </head>
 
 <body>
 
-  <div class="wrapper">
-
-    <div class="card">
-
-      <img src="thank.png" class="thank-img" />
-
-      <h1>✨ Order Berhasil! ✨</h1>
-
-      <p class="desc">Terima kasih sudah belanja! Pesananmu sedang diproses 😭💖</p>
-      <p class="small">Kamu akan dialihkan ke halaman utama sebentar lagi...</p>
-
-    </div>
-
+  <div class="box">
+    <div>c00lgui</div>
+    <div>xddd</div>
+    <div class="subtext">thank u for ordering lololol</div>
   </div>
 
+  <!-- cute or funny sound -->
+  <audio id="sfx" src="ding.mp3"></audio>
+
   <script>
-    // Redirect after 4 seconds
+    // Play funny ding or bass boosted sound
+    const snd = document.getElementById("sfx");
+    snd.volume = 0.8;
+    snd.play();
+
+    // Auto return after 3 sec (change if u want)
     setTimeout(() => {
       window.location.href = "index.html";
-    }, 4000);
+    }, 3000);
   </script>
 
 </body>
 </html>
-
