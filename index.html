@@ -623,7 +623,7 @@ function changeQty(index, val){
   if(cart[index]){ cart[index].qty = q; saveCart(); }
 }
 function removeItem(index){ cart.splice(index,1); saveCart(); showToast('Produk dihapus'); }
-function clearCart(){ if(!confirm('Kosongkan keranjang?')) return; cart = []; saveCart(); showToast('Keranjang dikosongkan'); }
+function clearCart(){ if(!confirm('clear ur inventory?')) return; cart = []; saveCart(); showToast('ur invent has been reset'); }
 
 function openSideCart(){ document.getElementById('sideCart').classList.add('open'); document.getElementById('sideCart').setAttribute('aria-hidden','false'); updateCartUI(); }
 function closeSideCart(){ document.getElementById('sideCart').classList.remove('open'); document.getElementById('sideCart').setAttribute('aria-hidden','true'); }
