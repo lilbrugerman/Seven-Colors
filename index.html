@@ -187,13 +187,24 @@
 </header>
 
 <!-- SIDEBAR -->
+<!-- SIDEBAR -->
 <aside id="sidebar" aria-hidden="true">
   <button class="sidebar-close" onclick="toggleSidebar()">✕</button>
+  
   <h3>Kategori</h3>
   <div class="cat-list" id="catList"></div>
+  
   <hr style="border:none;border-top:1px dashed #eee">
+
   <h4>Info</h4>
-  <p class="small" style="color:var(--muted);font-size:13px">Edit produk, harga, dan gambar melalui kode (Notepad). Tidak ada kontrol upload di web ini.</p>
+  <p class="small" style="color:var(--muted);font-size:13px">
+    Edit produk, harga, dan gambar melalui kode (Notepad). Tidak ada kontrol upload di web ini.
+  </p>
+
+  <!-- ✨ NEW LINKS HERE -->
+  <a href="aboutme.html" class="info-link">About Me</a>
+  <a href="faq.html" class="info-link">FAQ</a>
+  <a href="contact.html" class="info-link">Contact</a>
 </aside>
 
 <!-- SIDE CART -->
@@ -623,7 +634,7 @@ function changeQty(index, val){
   if(cart[index]){ cart[index].qty = q; saveCart(); }
 }
 function removeItem(index){ cart.splice(index,1); saveCart(); showToast('Produk dihapus'); }
-function clearCart(){ if(!confirm('clear ur inventory?')) return; cart = []; saveCart(); showToast('ur invent has been reset'); }
+function clearCart(){ if(!confirm('clear ur cart?')) return; cart = []; saveCart(); showToast('ok done go shop'); }
 
 function openSideCart(){ document.getElementById('sideCart').classList.add('open'); document.getElementById('sideCart').setAttribute('aria-hidden','false'); updateCartUI(); }
 function closeSideCart(){ document.getElementById('sideCart').classList.remove('open'); document.getElementById('sideCart').setAttribute('aria-hidden','true'); }
@@ -670,6 +681,7 @@ document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ document.getEl
 </script>
 </body>
 </html>
+
 
 
 
