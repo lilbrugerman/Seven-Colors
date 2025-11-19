@@ -430,19 +430,31 @@ function applyFilters(){
 function openProduct(id){ const p = productsData.find(x=>x.id===id); if(!p) return; alert(`${p.title}\n\n${p.desc}\n\nHarga: ${p.variations ? formatRp(p.basePrice||p.price) : formatRp(p.price)}`); }
 
 /* ========== VARIATION MODAL LOGIC ========== */
+/* ========== VARIATION MODAL (DYNAMIC VERSION) ========== */
+
 const modal = document.getElementById('varModal');
-let modalState = { productId:null, selectedSizeIndex:0, selectedTasteIndex:0, qty:1 };
+let modalState = {
+  productId: null,
+  qty: 1,
+  selected: {} // dynamic: ukuran, rasa, warna, model, benang, etc
+};
 
 function handleAddClick(id){
   const p = productsData.find(x=>x.id===id);
   if(!p) return;
-  // if product has variations -> open modal
+
   if(p.variations){
     openVarModal(id);
   } else {
-    // no variations -> direct add
     const qty = Math.max(1, parseInt(document.getElementById('qty-inline-'+id)?.value || 1));
-    cart.push({ id:p.id, title:p.title, price:Math.round(p.price), qty:qty, image:p.image, variant:{} });
+    cart.push({
+      id:p.id,
+      title:p.title,
+      price:p.price,
+      qty:qty,
+      image:p.image,
+      variant:{}
+    });
     saveCart();
     showToast(`${p.title} ditambahkan (${qty})`);
   }
@@ -451,93 +463,126 @@ function handleAddClick(id){
 function openVarModal(id){
   const p = productsData.find(x=>x.id===id);
   if(!p || !p.variations) return;
+
   modalState.productId = id;
-  modalState.selectedSizeIndex = 0;
-  modalState.selectedTasteIndex = 0;
   modalState.qty = 1;
+  modalState.selected = {};
 
   document.getElementById('modalImage').src = p.image;
   document.getElementById('modalTitle').textContent = p.title;
   document.getElementById('modalDesc').textContent = p.desc || '';
   document.getElementById('modalQty').value = 1;
 
-  // sizes
-  const sizeList = document.getElementById('varSizeList'); sizeList.innerHTML = '';
-  p.variations.ukuran.forEach((s, idx)=>{
-    const btn = document.createElement('div');
-    btn.className = 'variant-item' + (idx===0 ? ' active' : '');
-    btn.textContent = s.name;
-    btn.onclick = ()=>{ selectSize(idx); };
-    sizeList.appendChild(btn);
-  });
+  // clear previous variant UI
+  document.getElementById('varSizeList').innerHTML = '';
+  document.getElementById('varTasteList').innerHTML = '';
 
-  // tastes
-  const tasteList = document.getElementById('varTasteList'); tasteList.innerHTML = '';
-  p.variations.rasa.forEach((t, idx)=>{
-    const btn = document.createElement('div');
-    btn.className = 'variant-item' + (idx===0 ? ' active' : '');
-    btn.textContent = t;
-    btn.onclick = ()=>{ selectTaste(idx); };
-    tasteList.appendChild(btn);
+  // dynamic rendering area
+  const meta = document.querySelector('.modal-meta');
+  meta.querySelectorAll('.variant-group.dynamic').forEach(x=>x.remove());
+
+  // generate dynamic variation groups
+  Object.keys(p.variations).forEach(key => {
+    const group = document.createElement('div');
+    group.className = "variant-group dynamic";
+
+    const title = document.createElement('div');
+    title.className = "variant-title";
+    title.textContent = "Pilih " + key.charAt(0).toUpperCase() + key.slice(1);
+
+    const list = document.createElement('div');
+    list.className = "variant-list";
+
+    const options = p.variations[key];
+
+    options.forEach((opt, idx)=>{
+      const item = document.createElement('div');
+      item.className = "variant-item" + (idx === 0 ? " active" : "");
+
+      // unify text value
+      const label = typeof opt === "string" ? opt : opt.name;
+      item.textContent = label;
+
+      item.onclick = ()=>{
+        modalState.selected[key] = opt;
+        list.querySelectorAll('.variant-item').forEach(e=>e.classList.remove('active'));
+        item.classList.add('active');
+        updateModalPrice();
+      };
+
+      if(idx === 0) modalState.selected[key] = opt;
+
+      list.appendChild(item);
+    });
+
+    group.appendChild(title);
+    group.appendChild(list);
+    meta.insertBefore(group, meta.querySelector('.modal-footer'));
   });
 
   updateModalPrice();
   modal.style.display = 'flex';
 }
 
-function closeVarModal(e){
-  if(e && e.target && e.target.id !== 'varModal') return;
+function closeVarModal(){
   modal.style.display = 'none';
-  modalState = { productId:null, selectedSizeIndex:0, selectedTasteIndex:0, qty:1 };
 }
 
-function selectSize(idx){
-  modalState.selectedSizeIndex = idx;
-  document.querySelectorAll('#varSizeList .variant-item').forEach((el,i)=>el.classList.toggle('active', i===idx));
-  updateModalPrice();
-}
-function selectTaste(idx){
-  modalState.selectedTasteIndex = idx;
-  document.querySelectorAll('#varTasteList .variant-item').forEach((el,i)=>el.classList.toggle('active', i===idx));
-}
 function changeModalQty(delta){
-  const el = document.getElementById('modalQty');
-  let v = Math.max(1, parseInt(el.value||1) + delta);
+  let el = document.getElementById('modalQty');
+  let v = Math.max(1, parseInt(el.value || 1) + delta);
   el.value = v;
   modalState.qty = v;
   updateModalPrice();
 }
-document.getElementById('modalQty').addEventListener('input', (e)=>{ modalState.qty = Math.max(1, parseInt(e.target.value||1)); updateModalPrice(); });
+
+document.getElementById('modalQty').addEventListener('input', (e)=>{
+  modalState.qty = Math.max(1, parseInt(e.target.value||1));
+  updateModalPrice();
+});
 
 function updateModalPrice(){
   const p = productsData.find(x=>x.id===modalState.productId);
   if(!p) return;
-  const sizeObj = p.variations.ukuran[modalState.selectedSizeIndex];
-  const unit = Math.round((p.basePrice || p.price) + (sizeObj ? sizeObj.addPrice : 0));
-  const total = unit * (modalState.qty || 1);
+
+  let price = p.basePrice || p.price;
+
+  // apply additional price from selected variations
+  Object.values(modalState.selected).forEach(opt=>{
+    if(typeof opt === 'object' && opt.addPrice){
+      price += opt.addPrice;
+    }
+  });
+
+  const total = price * modalState.qty;
   document.getElementById('modalPrice').textContent = formatRp(total);
-  // set modalAddBtn to add with correct qty and variants
-  document.getElementById('modalAddBtn').onclick = ()=>{ modalAddToCart(p.id); };
+
+  document.getElementById('modalAddBtn').onclick = ()=> modalAddToCart(p.id, price);
 }
 
-function modalAddToCart(id){
+function modalAddToCart(id, unitPrice){
   const p = productsData.find(x=>x.id===id);
   if(!p) return;
-  const qty = Math.max(1, parseInt(document.getElementById('modalQty').value || 1));
-  const sizeObj = p.variations.ukuran[modalState.selectedSizeIndex];
-  const taste = p.variations.rasa[modalState.selectedTasteIndex];
-  const unitPrice = Math.round((p.basePrice || p.price) + (sizeObj ? sizeObj.addPrice : 0));
-  // push to cart with variant info
+
+  const qty = modalState.qty;
+  const variantLabels = {};
+
+  Object.keys(modalState.selected).forEach(key=>{
+    const opt = modalState.selected[key];
+    variantLabels[key] = typeof opt === 'string' ? opt : opt.name;
+  });
+
   cart.push({
     id:p.id,
     title:p.title,
     price:unitPrice,
     qty:qty,
     image:p.image,
-    variant: { ukuran:sizeObj.name, rasa:taste }
+    variant: variantLabels
   });
+
   saveCart();
-  showToast(`${p.title} (${sizeObj.name}, ${taste}) ditambahkan (${qty})`);
+  showToast(`${p.title} ditambahkan (${qty})`);
   closeVarModal();
 }
 
@@ -615,8 +660,6 @@ document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ document.getEl
 </script>
 </body>
 </html>
-
-
 
 
 
