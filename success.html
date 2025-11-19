@@ -66,6 +66,10 @@
 
   <script>
     window.addEventListener("load", () => {
+    // clear cart so items disappear after success
+    localStorage.removeItem("mini_cart_v1");
+      
+    window.addEventListener("load", () => {
       const audio = document.getElementById("sfx");
       audio.volume = 0.8;
       audio.play().catch(err => console.log("Autoplay blocked:", err));
@@ -78,3 +82,4 @@
 
 </body>
 </html>
+
