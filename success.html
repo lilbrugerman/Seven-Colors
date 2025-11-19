@@ -23,12 +23,18 @@
       text-align: center;
       font-size: 32px;
       line-height: 1.5;
-      animation: slideDown 0.6s ease-out;
+      animation: slideDown 0.8s ease-out, flash 1s infinite;
     }
 
     @keyframes slideDown {
       0% { transform: translateY(-200px); opacity: 0; }
       100% { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes flash {
+      0% { border-color: #ff0000; }
+      50% { border-color: #ff5050; }
+      100% { border-color: #ff0000; }
     }
 
     .subtext {
@@ -37,42 +43,37 @@
       opacity: 0.7;
     }
 
-    /* Flash red border */
-    @keyframes flash {
-      0% { border-color: #ff0000; }
-      50% { border-color: #ff5050; }
-      100% { border-color: #ff0000; }
+    .thank-img {
+      width: 450px;
+      border-radius: 8px;
+      margin-bottom: 20px;
     }
-
-    .box {
-      animation: slideDown 0.8s ease-out, flash 1s infinite;
-    }
-
-    /* Auto return */
   </style>
 </head>
 
 <body>
 
   <div class="box">
+    <img src="thank.png" class="thank-img">
+
     <div>c00lgui</div>
     <div>xddd</div>
     <div class="subtext">thank u for ordering lololol</div>
   </div>
 
-  <!-- cute or funny sound -->
-  <audio id="sfx" src="ding.mp3"></audio>
+  <!-- sound -->
+  <audio id="sfx" src="Coolgui.mp3"></audio>
 
   <script>
-    // Play funny ding or bass boosted sound
-    const snd = document.getElementById("sfx");
-    snd.volume = 0.8;
-    snd.play();
+    window.addEventListener("load", () => {
+      const audio = document.getElementById("sfx");
+      audio.volume = 0.8;
+      audio.play().catch(err => console.log("Autoplay blocked:", err));
+    });
 
-    // Auto return after 3 sec (change if u want)
     setTimeout(() => {
       window.location.href = "index.html";
-    }, 3000);
+    }, 9000);
   </script>
 
 </body>
