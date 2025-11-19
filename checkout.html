@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout — Mini E-Store</title>
+  <link rel="stylesheet" href="checkout.css" />
+</head>
+
+<body>
+  <div class="checkout-container">
+
+    <h1>Checkout</h1>
+
+    <div class="checkout-grid">
+
+      <!-- LEFT SIDE -->
+      <div class="left-column">
+
+        <!-- SHIPPING INFO -->
+        <div class="card">
+          <h2>Alamat Pengiriman</h2>
+          <label>Nama Penerima</label>
+          <input type="text" id="nama" placeholder="Winter" required>
+
+          <label>Nomor HP</label>
+          <input type="text" id="hp" placeholder="08xxxxxxxx" required>
+
+          <label>Alamat Lengkap</label>
+          <textarea id="alamat" placeholder="Jalan Mawar No. 22, RT 03 RW 01" required></textarea>
+        </div>
+
+        <!-- PAYMENT -->
+        <div class="card">
+          <h2>Metode Pembayaran</h2>
+
+          <label><input type="radio" name="pay" value="COD" checked> Bayar di Tempat (COD)</label>
+          <label><input type="radio" name="pay" value="QRIS"> QRIS</label>
+          <label><input type="radio" name="pay" value="Transfer"> Transfer Bank</label>
+        </div>
+
+      </div>
+
+      <!-- RIGHT SIDE -->
+      <div class="right-column">
+
+        <!-- ORDER SUMMARY -->
+        <div class="card">
+          <h2>Ringkasan Pesanan</h2>
+          <div id="orderItems"></div>
+
+          <div class="harga-row">
+            <span>Subtotal</span>
+            <span id="subtotal"></span>
+          </div>
+
+          <div class="harga-row">
+            <span>Ongkir</span>
+            <span id="ongkir">Rp 10.000</span>
+          </div>
+
+          <div class="harga-row total">
+            <span>Total Akhir</span>
+            <span id="totalAkhir"></span>
+          </div>
+
+          <button id="btnPlaceOrder">Buat Pesanan</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="checkout.js"></script>
+</body>
+</html>

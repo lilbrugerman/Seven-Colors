@@ -1,0 +1,91 @@
+body {
+  font-family: "Poppins", sans-serif;
+  background: #f7f7f7;
+  margin: 0;
+  padding: 20px;
+}
+
+.checkout-container {
+  max-width: 900px;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.checkout-grid {
+  display: grid;
+  grid-template-columns: 1fr 0.8fr;
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.card h2 {
+  margin-top: 0;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 6px 0 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+#orderItems {
+  margin-bottom: 15px;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.harga-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 6px 0;
+}
+
+.total {
+  font-weight: bold;
+  font-size: 18px;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+}
+
+#btnPlaceOrder {
+  width: 100%;
+  padding: 12px;
+  background: hotpink;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 15px;
+}
+
+#btnPlaceOrder:hover {
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .checkout-grid {
+    grid-template-columns: 1fr;
+  }
+}
