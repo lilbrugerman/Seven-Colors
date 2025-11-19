@@ -10,25 +10,28 @@ let subtotal = 0;
 
 // --- RENDER ITEMS ---
 cart.forEach(item => {
+  // Make sure price is a clean number
+  let price = parseInt(item.price.toString().replace(/\D/g, ""));
+
   const div = document.createElement("div");
   div.classList.add("order-item");
   div.innerHTML = `
     <span>${item.name} × ${item.qty}</span>
-    <span>Rp ${item.price * item.qty}</span>
+    <span>Rp ${price * item.qty}</span>
   `;
   orderItemsEl.appendChild(div);
 
-  subtotal += item.price * item.qty;
+  subtotal += price * item.qty;
 });
 
-subtotalEl.textContent = `Rp ${subtotal}`;
+subtotalEl.textContent = `Rp ${subtotal.toLocaleString("id-ID")}`;
+
 const ongkir = 10000;
-totalAkhirEl.textContent = `Rp ${subtotal + ongkir}`;
+
+totalAkhirEl.textContent = `Rp ${(subtotal + ongkir).toLocaleString("id-ID")}`;
 
 // --- ORDER BUTTON ---
 document.getElementById("btnPlaceOrder").addEventListener("click", () => {
-  alert("Order berhasil! 🎉");
   localStorage.removeItem("mini_cart_v1");
-  window.location.href = "success.html"; // pembayaran berhasil ahh screen
+  window.location.href = "success.html";
 });
-
