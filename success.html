@@ -65,21 +65,26 @@
   <audio id="sfx" src="Coolgui.mp3"></audio>
 
   <script>
-    window.addEventListener("load", () => {
-    // clear cart so items disappear after success
+  window.addEventListener("load", () => {
+    // Clear cart after success
     localStorage.removeItem("mini_cart_v1");
-      
-    window.addEventListener("load", () => {
-      const audio = document.getElementById("sfx");
+
+    // Play audio
+    const audio = document.getElementById("sfx");
+    if (audio) {
       audio.volume = 0.8;
       audio.play().catch(err => console.log("Autoplay blocked:", err));
-    });
+    }
 
+    // Redirect after 9 seconds
     setTimeout(() => {
       window.location.href = "index.html";
     }, 9000);
-  </script>
+  });
+</script>
+
 
 </body>
 </html>
+
 
