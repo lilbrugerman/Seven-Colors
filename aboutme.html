@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>About — Azure Wrath</title>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    height: 100vh;
+    width: 100vw;
+    background: url("purplebg.jpg"); /* ganti ke file bg kamu */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* stays in place */
+    font-family: "Georgia", serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  }
+
+  .wrapper {
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+    margin-top: -20px;
+  }
+
+  .pfp {
+    width: 240px;
+    height: 240px;
+    border-radius: 6px;
+    object-fit: cover;
+    border: 3px solid rgba(255,255,255,0.8);
+    box-shadow: 0 0 25px #c38bff;
+  }
+
+  .name {
+    font-size: 36px;
+    font-weight: bold;
+    margin-top: 15px;
+    text-shadow: 0 0 12px #e5c5ff, 0 0 20px #c06bff;
+    font-family: "Times New Roman", serif;
+  }
+
+  .box {
+    margin: 20px auto 0;
+    width: 85%;
+    max-height: 250px;
+    overflow-y: auto; /* SCROLLABLE */
+    padding: 20px;
+    border: 2px solid rgba(255,255,255,0.7);
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(2px);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(180,110,255,0.7);
+  }
+
+  .box::-webkit-scrollbar {
+    width: 8px;
+  }
+  .box::-webkit-scrollbar-thumb {
+    background: #bb77ff;
+    border-radius: 5px;
+  }
+
+  a.back {
+    margin-top: 25px;
+    display: inline-block;
+    color: #d8b9ff;
+    font-size: 20px;
+    text-decoration: none;
+    text-shadow: 0 0 10px #cc87ff;
+  }
+
+  a.back:hover {
+    opacity: .7;
+  }
+
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+  <img src="azure.png" class="pfp" alt="Azure Wrath">
+
+  <div class="name">Azure Wrath</div>
+
+  <div class="box">
+    <p>
+      Winter, also known as Azure Wrath, is a mysterious coder who  
+      thrives under purple moonlight and glitchy aesthetics.  
+      Known for chaotic creativity and a soft spot for neon vibes,  
+      Winter designs places that feel like magic and madness mixed together.
+      <br><br>
+      They enjoy creating tiny worlds like this e-store,  
+      messing with visuals, and adding “too much purple” —  
+      whatever that means.
+      <br><br>
+      If something breaks?  
+      It's not a bug, it's ✨ personality ✨
+    </p>
+  </div>
+
+  <a href="index.html" class="back">⇦ return to home</a>
+</div>
+
+</body>
+</html>
