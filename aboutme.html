@@ -5,6 +5,17 @@
 <title>About — Azure Wrath</title>
 
 <style>
+
+ #sparkleCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none; /* biar ga ganggu klik */
+  z-index: 1;
+}
+
   * {
     margin: 0;
     padding: 0;
@@ -14,7 +25,7 @@
   body {
     height: 100vh;
     width: 100vw;
-    background: url("purplebg.jpg"); /* ganti ke file bg kamu */
+    background: url("purple.jpg"); /* ganti ke file bg kamu */
     background-size: cover;
     background-position: center;
     background-attachment: fixed; /* stays in place */
@@ -25,12 +36,18 @@
     color: white;
   }
 
+ <canvas id="sparkleCanvas"></canvas>
+
   .wrapper {
-    text-align: center;
-    width: 100%;
-    max-width: 600px;
-    margin-top: -20px;
-  }
+  text-align: center;
+  width: 100%;
+  max-width: 600px;
+  margin-top: -20px;
+
+  position: relative; /* biar konten berada di atas sparkles */
+  z-index: 5;
+}
+
 
   .pfp {
     width: 240px;
@@ -89,28 +106,76 @@
 <body>
 
 <div class="wrapper">
-  <img src="azure.png" class="pfp" alt="Azure Wrath">
+  <img src="azurewrath.png" class="pfp" alt="Azure Wrath">
 
   <div class="name">Azure Wrath</div>
 
   <div class="box">
     <p>
-      Winter, also known as Azure Wrath, is a mysterious coder who  
-      thrives under purple moonlight and glitchy aesthetics.  
-      Known for chaotic creativity and a soft spot for neon vibes,  
-      Winter designs places that feel like magic and madness mixed together.
+      “I forgave you long before I stopped hurting.” 💜
       <br><br>
-      They enjoy creating tiny worlds like this e-store,  
-      messing with visuals, and adding “too much purple” —  
-      whatever that means.
+      Killow/Seven
       <br><br>
-      If something breaks?  
-      It's not a bug, it's ✨ personality ✨
+      “Just a creature with deadlines, fried chicken cravings,  
+      2% social battery, 120% chaos, and a certified menace™
+      energy powered entirely by recreational procrastination.”
     </p>
   </div>
 
   <a href="index.html" class="back">⇦ return to home</a>
 </div>
 
+ <script>
+const canvas = document.getElementById("sparkleCanvas");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+window.addEventListener("resize", () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+const sparkles = [];
+
+function createSparkle() {
+  const size = Math.random() * 3 + 1; 
+  const sparkle = {
+    x: Math.random() * canvas.width,
+    y: -10,
+    size: size,
+    speed: Math.random() * 1 + 0.3,
+    opacity: Math.random() * 0.7 + 0.3
+  };
+  sparkles.push(sparkle);
+}
+
+function drawSparkles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  sparkles.forEach((s, i) => {
+    ctx.fillStyle = `rgba(200, 120, 255, ${s.opacity})`;
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+    ctx.fill();
+
+    s.y += s.speed;
+    s.opacity -= 0.002;
+
+    if (s.opacity <= 0) sparkles.splice(i, 1);
+  });
+}
+
+setInterval(createSparkle, 80);
+
+function animate() {
+  drawSparkles();
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+
 </body>
 </html>
+
