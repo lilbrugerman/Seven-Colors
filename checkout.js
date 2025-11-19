@@ -1,5 +1,5 @@
 // --- GET CART FROM LOCALSTORAGE ---
-const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+let cart = JSON.parse(localStorage.getItem('mini_cart_v1')) || [];
 
 // DOM elements
 const orderItemsEl = document.getElementById("orderItems");
@@ -28,6 +28,7 @@ totalAkhirEl.textContent = `Rp ${subtotal + ongkir}`;
 // --- ORDER BUTTON ---
 document.getElementById("btnPlaceOrder").addEventListener("click", () => {
   alert("Order berhasil! 🎉");
-  localStorage.removeItem("cart");
-  window.location.href = "index.html"; // kembalikan ke homepage
+  localStorage.removeItem("mini_cart_v1");
+  window.location.href = "success.html"; // pembayaran berhasil ahh screen
 });
+
