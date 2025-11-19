@@ -32,6 +32,15 @@ totalAkhirEl.textContent = `Rp ${(subtotal + ongkir).toLocaleString("id-ID")}`;
 
 // --- ORDER BUTTON ---
 document.getElementById("btnPlaceOrder").addEventListener("click", () => {
+  alert("Order berhasil! 🎉");
+
+  // Clear cart
   localStorage.removeItem("mini_cart_v1");
-  window.location.href = "success.html";
+
+  // Delay redirect slightly so clearing finishes
+  setTimeout(() => {
+    window.location.href = "success.html";
+  }, 200);
 });
+
+
