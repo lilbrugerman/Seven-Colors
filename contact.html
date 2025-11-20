@@ -635,19 +635,6 @@ function chooseMood(msg) {
         return "caring";
     }
 
-    // REMEMBRANCE
-    if (
-        msg.includes("old times") ||
-        msg.includes("c00lgui") ||
-        msg.includes("c00l") ||
-        msg.includes("hacking") ||
-        msg.includes("nols") ||
-        msg.includes("my void") ||
-        Math.random() < 0.7
-    ) {
-        return "remembrance";
-    }
-
     return "neutral";
 }
 
@@ -717,6 +704,22 @@ function sendWhisper() {
     // =========================
     // NORMAL KEYWORDS
     // =========================
+    // =========================
+// REMEMBRANCE (priority FIRST)
+// =========================
+if (
+    msg.includes("old times") ||
+    msg.includes("c00lgui") ||
+    msg.includes("c00l") ||
+    msg.includes("hacking") ||
+    msg.includes("nols") ||
+    msg.includes("my void")
+) {
+    const mood = "remembrance";
+    reply = randomMoodReply(mood);
+    typeText(reply);
+    return;
+}
 
     if (msg.includes("noli")) reply = "If you wanted my attention, you could've just asked.";
     else if (msg.includes("void")) reply = "Careful. The Void listens... and it adores me.";
@@ -745,6 +748,7 @@ function sendWhisper() {
 
 </body>
 </html>
+
 
 
 
