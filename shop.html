@@ -602,6 +602,7 @@ function modalAddToCart(id, unitPrice){
 
     // --- CORRECT ACTIONS ---
     saveCart();
+    updateCartUI ();
     showToast(`${cartItem.title} added to ur list (${qty})`);
     closeVarModal();
 }
