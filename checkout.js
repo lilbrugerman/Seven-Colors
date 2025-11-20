@@ -73,7 +73,6 @@ function calculateOngkir() {
 }
 
 function updateTotal() {
-
     // --- Recalculate subtotal every time ---
     let subtotal = 0;
     cart.forEach(item => {
@@ -94,8 +93,9 @@ function updateTotal() {
         "Rp " + (subtotal + ongkir).toLocaleString("id-ID");
 }
 
-  updateTotal()
+ updateTotal()
 
+document.getElementById("alamat").addEventListener("input", updateTotal);
 // --- ORDER BUTTON ---
 document.getElementById("btnPlaceOrder").addEventListener("click", () => {
     const nama = document.getElementById("nama").value.trim();
@@ -118,6 +118,7 @@ document.getElementById("btnPlaceOrder").addEventListener("click", () => {
     window.location.href = "success.html";
   }, 200);
 });
+
 
 
 
