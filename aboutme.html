@@ -97,56 +97,50 @@
     opacity: .7;
   }
  
-  /* ———————————— MOBILE RESPONSIVE FIX ———————————— */
 @media (max-width: 600px) {
 
   body {
     background-size: cover;
-    background-attachment: scroll; /* FIX background pecah */
+    background-attachment: scroll;
     padding: 20px 10px;
   }
 
-  .profile-container {
-    width: 90%;
-    margin: 80px auto 40px auto;
-    padding: 15px;
-    border-radius: 15px;
-
-    box-shadow:
-      0 0 10px rgba(255,255,255,0.15),
-      inset 0 0 10px rgba(255,255,255,0.1);
+  .wrapper {
+    width: 95%;
+    max-width: 95%;
+    margin-top: 20px;
   }
 
-  .profile-img {
-    width: 120px;
-    height: 120px;
-    border-width: 3px;
+  .pfp {
+    width: 150px;
+    height: 150px;
+    box-shadow: 0 0 12px #c38bff;
+    border-width: 2px;
   }
 
   .name {
-    font-size: 22px;
+    font-size: 26px;
     margin-top: 10px;
+    text-shadow: 0 0 8px #e5c5ff;
   }
 
-  .quote-box {
-    margin-top: 18px;
-    padding: 12px;
-    font-size: 14px;
+  .box {
     width: 95%;
-  }
-
-  .small-desc {
-    font-size: 13px;
-    line-height: 1.4;
-    margin-top: 8px;
-  }
-
-  .back-home {
+    padding: 15px;
     font-size: 15px;
-    margin-top: 25px;
+    line-height: 1.4;
+    max-height: 200px;
+  }
+
+  .box p {
+    font-size: 15px;
+  }
+
+  a.back {
+    font-size: 16px;
+    margin-top: 18px;
   }
 }
-
 </style>
 </head>
 
@@ -227,6 +221,7 @@ animate();
 
 </body>
 </html>
+
 
 
 
