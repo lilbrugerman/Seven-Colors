@@ -215,6 +215,60 @@
   100% { transform: translateY(0) translateX(0); opacity: .3; }
 }
 
+ /* WHISPER BOX */
+.whisper-box {
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(0,0,0,0.45);
+    border: 2px solid #7449ff;
+    border-radius: 12px;
+    box-shadow:
+        0 0 12px #9b6cff,
+        inset 0 0 20px rgba(120,0,255,0.35);
+    backdrop-filter: blur(3px);
+}
+
+.whisper-display {
+    min-height: 80px;
+    padding: 15px;
+    color: #dfc8ff;
+    font-style: italic;
+    font-size: 17px;
+    text-shadow: 0 0 8px #8b33ff88;
+}
+
+.whisper-input-area {
+    margin-top: 12px;
+    display: flex;
+    gap: 10px;
+}
+
+.whisper-input-area input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #a870ff;
+    background: rgba(0,0,0,0.35);
+    color: #e8d8ff;
+}
+
+.whisper-input-area button {
+    padding: 10px 18px;
+    background: #7449ff;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    font-weight: 700;
+    box-shadow: 0 0 12px #7449ff;
+    transition: 0.2s;
+}
+
+.whisper-input-area button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 16px #a870ff;
+}
+
 /* No visible audio controls */
 audio {
     display: none;
@@ -297,6 +351,15 @@ audio {
       Should you seek answers… they will find you first.”
     </p>
   </div>
+
+ <div class="whisper-box">
+    <div id="whisperDisplay" class="whisper-display"></div>
+
+    <div class="whisper-input-area">
+        <input id="input" type="text" placeholder="...whisper to Noli">
+        <button onclick="sendWhisper()">Send</button>
+    </div>
+</div>
 
  <div class="social-links">
 
@@ -477,7 +540,21 @@ function randomMoodReply(mood) {
 // =========================
 // SMART MOOD PICKER
 // =========================
+function typeText(text) {
+    const box = document.getElementById("whisperDisplay");
+    box.innerHTML = "";
+    let i = 0;
 
+    function type() {
+        if (i < text.length) {
+            box.innerHTML += text[i];
+            i++;
+            setTimeout(type, 35); 
+        }
+    }
+    type();
+}
+ 
 function chooseMood(msg) {
     // GREETING
     if (
@@ -667,6 +744,7 @@ function sendWhisper() {
 
 </body>
 </html>
+
 
 
 
