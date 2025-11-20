@@ -573,7 +573,7 @@ function updateModalPrice(){
   document.getElementById('modalAddBtn').onclick = ()=> modalAddToCart(p.id, price);
 }
 
-function modalAddToCart(id, unitPrice){
+function modalAddToCart(id, unitPrice) {
     const p = productsData.find(x => x.id === id);
     if (!p) return;
 
@@ -582,7 +582,7 @@ function modalAddToCart(id, unitPrice){
     const variantLabels = {};
     Object.keys(modalState.selected).forEach(key => {
         const opt = modalState.selected[key];
-        variantLabels[key] = typeof opt === 'string' ? opt : opt.name;
+            variantLabels[key] = typeof opt === 'string' ? opt : opt.name;
     });
 
     // --- CREATE CART ITEM ---
@@ -596,26 +596,19 @@ function modalAddToCart(id, unitPrice){
     };
 
     // --- SAVE TO LOCALSTORAGE ---
-    let cart = JSON.parse(localStorage.getItem("mini_cart_v1")) || [];
-    cart.push(cartItem);
-    localStorage.setItem("mini_cart_v1", JSON.stringify(cart));
-
-    // --- CORRECT ACTIONS ---
-    saveCart();
+   cart.push(cartItem);
+    saveCart()
     updateCartUI ();
     showToast(`${cartItem.title} added to ur list (${qty})`);
     closeVarModal();
 }
 
 /* ========== CART FUNCTIONS ========== */
-function saveCart(){ localStorage.setItem('mini_cart_v1', JSON.stringify(cart)); updateCartUI(); }
+function saveCart() { localStorage.setItem('mini_cart_v1', JSON.stringify(cart)); updateCartUI(); }
 
-function updateCartUI(){
+function updateCartUI() {
     const list = document.getElementById('cartItemsList'); 
     list.innerHTML = '';
-
-    // 🔥 load cart dari localStorage
-    let cart = JSON.parse(localStorage.getItem('mini_cart_v1')) || [];
 
     let total = 0;
   cart.forEach((item, index)=>{
@@ -638,6 +631,7 @@ function updateCartUI(){
     list.appendChild(node);
   });
   document.getElementById('cartTotal').textContent = formatRp(total);
+  
   const count = cart.reduce((s,i)=>s+i.qty,0);
   document.getElementById('cartCountTop').textContent = count;
   document.getElementById('cartCountFloat').textContent = count;
@@ -697,6 +691,7 @@ document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ document.getEl
 </script>
 </body>
 </html>
+
 
 
 
