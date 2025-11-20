@@ -5,17 +5,6 @@
 <title>My Dear Nightshade 💜</title>
 
 <style>
-
- #sparkleCanvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none; /* biar ga ganggu klik */
-  z-index: 1;
-}
-
   * {
     margin: 0;
     padding: 0;
@@ -23,31 +12,35 @@
   }
 
   body {
-    height: 100vh;
-    width: 100vw;
-    background: url("purple.jpg"); /* ganti ke file bg kamu */
+    background: url("purple.jpg");
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* stays in place */
+    background-attachment: fixed;
     font-family: "Georgia", serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     color: white;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    text-align: center;
   }
 
- <canvas id="sparkleCanvas"></canvas>
+  /* Sparkle canvas */
+  #sparkleCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1;
+  }
 
   .wrapper {
-  text-align: center;
-  width: 100%;
-  max-width: 600px;
-  margin-top: -20px;
-
-  position: relative; /* biar konten berada di atas sparkles */
-  z-index: 5;
-}
-
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    z-index: 5;
+    position: relative;
+  }
 
   .pfp {
     width: 240px;
@@ -70,13 +63,15 @@
     margin: 20px auto 0;
     width: 85%;
     max-height: 250px;
-    overflow-y: auto; /* SCROLLABLE */
+    overflow-y: auto;
     padding: 20px;
     border: 2px solid rgba(255,255,255,0.7);
     background: rgba(0,0,0,0.45);
     backdrop-filter: blur(2px);
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(180,110,255,0.7);
+    z-index: 5;
+    position: relative;
   }
 
   .box::-webkit-scrollbar {
@@ -94,16 +89,20 @@
     font-size: 20px;
     text-decoration: none;
     text-shadow: 0 0 10px #cc87ff;
+    z-index: 5;
+    position: relative;
   }
 
   a.back:hover {
     opacity: .7;
   }
-
 </style>
 </head>
 
 <body>
+
+<!-- SPARKLE CANVAS (must be here, NOT in <style>) -->
+<canvas id="sparkleCanvas"></canvas>
 
 <div class="wrapper">
   <img src="azurewrath.png" class="pfp" alt="Azure Wrath">
@@ -116,7 +115,7 @@
       <br><br>
       Killow/Seven
       <br><br>
-      “Just a creature with deadlines, fried chicken cravings,  
+      “Just a creature with deadlines, fried chicken cravings,
       2% social battery, 120% chaos, and a certified menace™
       energy powered entirely by recreational procrastination.”
     </p>
@@ -125,37 +124,36 @@
   <a href="index.html" class="back">⇦ return to home</a>
 </div>
 
- <script>
+<script>
 const canvas = document.getElementById("sparkleCanvas");
 const ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.width = innerWidth;
+canvas.height = innerHeight;
 
-window.addEventListener("resize", () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+addEventListener("resize", () => {
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
 });
 
 const sparkles = [];
 
 function createSparkle() {
-  const size = Math.random() * 3 + 1; 
-  const sparkle = {
+  const size = Math.random() * 3 + 1;
+  sparkles.push({
     x: Math.random() * canvas.width,
     y: -10,
-    size: size,
+    size,
     speed: Math.random() * 1 + 0.3,
     opacity: Math.random() * 0.7 + 0.3
-  };
-  sparkles.push(sparkle);
+  });
 }
 
 function drawSparkles() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   sparkles.forEach((s, i) => {
-    ctx.fillStyle = `rgba(200, 120, 255, ${s.opacity})`;
+    ctx.fillStyle = `rgba(200,120,255,${s.opacity})`;
     ctx.beginPath();
     ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
     ctx.fill();
@@ -178,5 +176,3 @@ animate();
 
 </body>
 </html>
-
-
