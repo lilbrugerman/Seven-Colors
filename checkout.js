@@ -82,8 +82,6 @@ function updateTotal() {
         "Rp " + ongkir.toLocaleString("id-ID");
 }
 
-totalAkhirEl.textContent = `Rp ${(subtotal + ongkir).toLocaleString("id-ID")}`;
-
 // --- ORDER BUTTON ---
 document.getElementById("btnPlaceOrder").addEventListener("click", () => {
     const nama = document.getElementById("nama").value.trim();
@@ -106,6 +104,7 @@ document.getElementById("btnPlaceOrder").addEventListener("click", () => {
     window.location.href = "success.html";
   }, 200);
 });
+
 
 
 
