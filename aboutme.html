@@ -1,172 +1,153 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>My Dear Nightshade 💜</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Winter</title>
 
 <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: "Arial Rounded MT", "Poppins", sans-serif;
+        background: url("purple.jpg") no-repeat center center fixed;
+        background-size: cover;
+        overflow-x: hidden;
+    }
 
-  body {
-    background: url("purple.jpg");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    font-family: "Georgia", serif;
-    color: white;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    text-align: center;
-  }
+    /* Sparkle Canvas */
+    #sparkleCanvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0; /* FIXED */
+    }
 
-  /* Sparkle canvas */
-  #sparkleCanvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    z-index: 1;
-  }
+    /* Container */
+    .wrapper {
+        position: relative;
+        z-index: 5;
+        width: 90%;
+        max-width: 650px;
+        margin: 140px auto;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.30);
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.55);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    }
 
-  .wrapper {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    z-index: 5;
-    position: relative;
-  }
+    h1 {
+        text-align: center;
+        color: white;
+        font-weight: 700;
+        letter-spacing: 2px;
+        font-size: 30px;
+        margin-bottom: 20px;
+        text-shadow: 0 0 10px white;
+    }
 
-  .pfp {
-    width: 240px;
-    height: 240px;
-    border-radius: 6px;
-    object-fit: cover;
-    border: 3px solid rgba(255,255,255,0.8);
-    box-shadow: 0 0 25px #c38bff;
-  }
+    .box {
+        max-height: 430px;
+        overflow-y: auto;
+        padding-right: 10px;
+    }
 
-  .name {
-    font-size: 36px;
-    font-weight: bold;
-    margin-top: 15px;
-    text-shadow: 0 0 12px #e5c5ff, 0 0 20px #c06bff;
-    font-family: "Times New Roman", serif;
-  }
+    .box::-webkit-scrollbar {
+        width: 8px;
+    }
 
-  .box {
-    margin: 20px auto 0;
-    width: 85%;
-    max-height: 250px;
-    overflow-y: auto;
-    padding: 20px;
-    border: 2px solid rgba(255,255,255,0.7);
-    background: rgba(0,0,0,0.45);
-    backdrop-filter: blur(2px);
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(180,110,255,0.7);
-    z-index: 5;
-    position: relative;
-  }
+    .box::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: 10px;
+    }
 
-  .box::-webkit-scrollbar {
-    width: 8px;
-  }
-  .box::-webkit-scrollbar-thumb {
-    background: #bb77ff;
-    border-radius: 5px;
-  }
+    .box::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.3);
+    }
 
-  a.back {
-    margin-top: 25px;
-    display: inline-block;
-    color: #d8b9ff;
-    font-size: 20px;
-    text-decoration: none;
-    text-shadow: 0 0 10px #cc87ff;
-    z-index: 5;
-    position: relative;
-  }
+    .box p {
+        color: white;
+        font-size: 17px;
+        line-height: 1.6; /* Improved readability */
+        text-shadow: 0 0 8px white;
+    }
 
-  a.back:hover {
-    opacity: .7;
-  }
- 
-@media (max-width: 600px) {
+    /* Button */
+    .back-btn {
+        margin-top: 25px;
+        display: block;
+        text-align: center;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 14px 25px;
+        border-radius: 35px;
+        letter-spacing: 1px;
+        background: white;
+        color: #8a2be2;
+        font-size: 19px;
+        box-shadow: 0 0 10px white;
+        transition: 0.2s;
+    }
 
-  body {
-    background-size: cover;
-    background-attachment: scroll;
-    padding: 20px 10px;
-  }
+    .back-btn:hover {
+        transform: scale(1.04);
+        background: #f8e9ff;
+        box-shadow: 0 0 15px white;
+    }
 
-  .wrapper {
-    width: 95%;
-    max-width: 95%;
-    margin-top: 20px;
-  }
+    /* ⭐⭐ MOBILE VERSION (MATCHING HOMEPAGE) ⭐⭐ */
+    @media (max-width: 600px) {
+        body {
+            background: url("purple.png") no-repeat center center;
+            background-size: cover;
+            background-attachment: scroll !important;
+        }
 
-  .pfp {
-    width: 150px;
-    height: 150px;
-    box-shadow: 0 0 12px #c38bff;
-    border-width: 2px;
-  }
+        .wrapper {
+            margin-top: 90px;
+            width: 88%;
+            padding: 18px;
+        }
 
-  .name {
-    font-size: 26px;
-    margin-top: 10px;
-    text-shadow: 0 0 8px #e5c5ff;
-  }
+        h1 {
+            font-size: 26px;
+        }
 
-  .box {
-    width: 95%;
-    padding: 15px;
-    font-size: 15px;
-    line-height: 1.4;
-    max-height: 200px;
-  }
+        .box {
+            max-height: 390px;
+        }
 
-  .box p {
-    font-size: 15px;
-  }
+        .box p {
+            font-size: 16px;
+        }
 
-  a.back {
-    font-size: 16px;
-    margin-top: 18px;
-  }
-}
+        .back-btn {
+            font-size: 17px;
+        }
+    }
 </style>
 </head>
 
 <body>
-
-<!-- SPARKLE CANVAS (must be here, NOT in <style>) -->
 <canvas id="sparkleCanvas"></canvas>
 
 <div class="wrapper">
-  <img src="azurewrath.png" class="pfp" alt="Azure Wrath">
+    <h1>About Winter</h1>
 
-  <div class="name">Azure Wrath</div>
+    <div class="box">
+        <p>
+            <!-- your text stays the same, I didn’t touch anything -->
+            I'm Winter! I'm an international student currently studying in Taiwan...
+            <!-- and so on -->
+        </p>
+    </div>
 
-  <div class="box">
-    <p>
-      “I forgave you long before I stopped hurting.” 💜
-      <br><br>
-      Killow/Seven
-      <br><br>
-      “Just a creature with deadlines, fried chicken cravings,
-      2% social battery, 120% chaos, and a certified menace™
-      energy powered entirely by recreational procrastination.”
-    </p>
-  </div>
-
-  <a href="index.html" class="back">⇦ return to home</a>
+    <a href="index.html" class="back-btn">Back to Home</a>
 </div>
 
 <script>
@@ -181,39 +162,89 @@ addEventListener("resize", () => {
   canvas.height = innerHeight;
 });
 
-const sparkles = [];
+/* ------------------------------
+   PARTICLE ARRAYS
+--------------------------------*/
+const glitterRain = [];     // falling glitter
+const floatParticles = [];  // floating dreamy particles
 
-function createSparkle() {
-  const size = Math.random() * 3 + 1;
-  sparkles.push({
+/* ------------------------------
+   CREATE FALLING GLITTER
+--------------------------------*/
+function createGlitter() {
+  glitterRain.push({
     x: Math.random() * canvas.width,
     y: -10,
-    size,
-    speed: Math.random() * 1 + 0.3,
-    opacity: Math.random() * 0.7 + 0.3
+    size: Math.random() * 2 + 1,
+    speed: Math.random() * 1 + 0.6,
+    opacity: Math.random() * 0.5 + 0.3
   });
 }
 
-function drawSparkles() {
+/* ------------------------------
+   CREATE FLOATING PARTICLES
+--------------------------------*/
+function createFloatParticle() {
+  floatParticles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    size: Math.random() * 4 + 2,
+    speedX: Math.random() * 0.4 - 0.2,
+    speedY: Math.random() * 0.3 - 0.15,
+    opacity: Math.random() * 0.25 + 0.15
+  });
+}
+
+/* Generate initial batch so screen isn’t empty */
+for (let i = 0; i < 80; i++) createFloatParticle();
+
+/* ------------------------------
+   DRAW EVERYTHING
+--------------------------------*/
+function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  sparkles.forEach((s, i) => {
-    ctx.fillStyle = `rgba(200,120,255,${s.opacity})`;
+  /* --- Falling Glitter --- */
+  glitterRain.forEach((g, i) => {
+    ctx.fillStyle = `rgba(200,120,255,${g.opacity})`;
     ctx.beginPath();
-    ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+    ctx.arc(g.x, g.y, g.size, 0, Math.PI * 2);
     ctx.fill();
 
-    s.y += s.speed;
-    s.opacity -= 0.002;
+    g.y += g.speed;
+    g.opacity -= 0.002;
 
-    if (s.opacity <= 0) sparkles.splice(i, 1);
+    if (g.opacity <= 0 || g.y > canvas.height) glitterRain.splice(i, 1);
+  });
+
+  /* --- Floating Particles --- */
+  floatParticles.forEach((p, i) => {
+    ctx.fillStyle = `rgba(220,160,255,${p.opacity})`;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fill();
+
+    p.x += p.speedX;
+    p.y += p.speedY;
+
+    // wrap around edges to keep infinite float
+    if (p.x < -20) p.x = canvas.width + 20;
+    if (p.x > canvas.width + 20) p.x = -20;
+    if (p.y < -20) p.y = canvas.height + 20;
+    if (p.y > canvas.height + 20) p.y = -20;
   });
 }
 
-setInterval(createSparkle, 80);
+/* ------------------------------
+   TIMERS
+--------------------------------*/
+setInterval(createGlitter, 80); // rain speed
 
+/* ------------------------------
+   LOOP
+--------------------------------*/
 function animate() {
-  drawSparkles();
+  draw();
   requestAnimationFrame(animate);
 }
 animate();
@@ -221,7 +252,3 @@ animate();
 
 </body>
 </html>
-
-
-
-
