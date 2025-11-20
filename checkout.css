@@ -1,6 +1,9 @@
+/* ========= COOLGUI THEME ========= */
+
 body {
-  font-family: "Poppins", sans-serif;
-  background: #f7f7f7;
+  font-family: "Courier New", monospace;
+  background: black;
+  color: white;
   margin: 0;
   padding: 20px;
 }
@@ -13,31 +16,42 @@ body {
 h1 {
   text-align: center;
   margin-bottom: 20px;
+  color: white;
+  text-shadow: 0 0 8px red;
 }
 
+/* GRID */
 .checkout-grid {
   display: grid;
   grid-template-columns: 1fr 0.8fr;
   gap: 20px;
 }
 
+/* === COOLGUI CARDS === */
 .card {
-  background: white;
+  background: black;
   padding: 20px;
-  border-radius: 14px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border: 5px solid red;
+  border-radius: 0;
+  box-shadow: 0 0 25px red;
 }
 
 .card h2 {
   margin-top: 0;
+  color: white;
+  text-shadow: 0 0 6px red;
 }
 
+/* === INPUTS === */
 input, textarea {
   width: 100%;
   padding: 10px;
   margin: 6px 0 15px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+  background: black;
+  color: white;
+  border: 3px solid red;
+  border-radius: 0;
+  font-family: "Courier New", monospace;
 }
 
 textarea {
@@ -45,45 +59,43 @@ textarea {
   resize: vertical;
 }
 
-#orderItems {
-  margin-bottom: 15px;
-}
-
-.order-item {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
-}
-
+/* PRICE ROWS */
+.order-item,
 .harga-row {
   display: flex;
   justify-content: space-between;
-  margin: 6px 0;
+  margin-bottom: 8px;
+  color: white;
 }
 
 .total {
   font-weight: bold;
   font-size: 18px;
-  border-top: 1px solid #ddd;
+  border-top: 3px solid red;
   padding-top: 10px;
 }
 
+/* === COOLGUI BUTTON === */
 #btnPlaceOrder {
   width: 100%;
   padding: 12px;
-  background: hotpink;
-  border: none;
-  border-radius: 10px;
+  background: black;
   color: white;
+  font-size: 18px;
+  font-family: "Courier New", monospace;
+  border: 4px solid red;
+  border-radius: 0;
   cursor: pointer;
-  font-size: 16px;
-  margin-top: 15px;
+  box-shadow: 0 0 20px red;
+  text-transform: uppercase;
+  font-weight: 900;
 }
 
 #btnPlaceOrder:hover {
-  opacity: 0.9;
+  box-shadow: 0 0 35px red;
 }
 
+/* MOBILE RESPONSIVE */
 @media (max-width: 768px) {
   .checkout-grid {
     grid-template-columns: 1fr;
