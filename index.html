@@ -662,10 +662,11 @@ updateCartUI();
 function goCheckout() {
   const cart = JSON.parse(localStorage.getItem("mini_cart_v1")) || [];
 
-  if (cart.length === 0) {
+  if (!cart || cart.length === 0) {
     alert("what r u buying, choose some items xp");
     return;
   }
+  
   window.location.href = "checkout.html";
 }
   
@@ -681,6 +682,7 @@ document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ document.getEl
 </script>
 </body>
 </html>
+
 
 
 
