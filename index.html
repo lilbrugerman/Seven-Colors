@@ -117,12 +117,18 @@
    .shop-btn-fire:hover {
        transform: scale(1.12);
    }
-    /* MOBILE FIXES */
+   /* MOBILE FIXES */
 @media (max-width: 600px) {
 
   body {
+    overflow-x: hidden;
     background-size: cover;
     background-position: center;
+  }
+
+  .container {
+    margin-top: 20px;
+    width: 100%;
   }
 
   .fire-icon {
@@ -132,19 +138,31 @@
 
   h1 {
     font-size: 1.8rem;
-    text-align: center;
+    margin: 15px 0;
+    padding: 0 10px;
   }
 
-  .button-row {
+  /* Make buttons go vertical */
+  .buttons {
     flex-direction: column;
     gap: 20px;
+    width: 100%;
+    align-items: center;
   }
 
-  .shop-btn-fire,
-  .other-btn {
-    width: 80%;
-    max-width: 280px;
-    margin: 0 auto;
+  /* Adjust each button size */
+  .btn-box {
+    width: 75%;
+    max-width: 300px;
+    height: 90px;
+    font-size: 22px;
+  }
+
+  /* SHOP fire button stays responsive */
+  .shop-btn-fire {
+    width: 75%;
+    max-width: 300px;
+    height: 90px;
   }
 }
 </style>
@@ -178,6 +196,7 @@
 
 </body>
 </html>
+
 
 
 
