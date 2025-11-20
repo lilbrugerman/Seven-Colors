@@ -16,7 +16,7 @@ cart.forEach(item => {
   const div = document.createElement("div");
   div.classList.add("order-item");
   div.innerHTML = `
-    <span>${item.name} × ${item.qty}</span>
+    <span>${item.title} × ${item.qty}</span>
     <span>Rp ${price * item.qty}</span>
   `;
   orderItemsEl.appendChild(div);
@@ -42,6 +42,7 @@ document.getElementById("btnPlaceOrder").addEventListener("click", () => {
     window.location.href = "success.html";
   }, 200);
 });
+
 
 
 
