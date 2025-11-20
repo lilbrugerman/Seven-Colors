@@ -82,7 +82,7 @@ function updateTotal() {
     });
 
     // --- Calculate ongkir based on latest subtotal ---
-    let ongkir = calculateOngkir(subtotal);
+    let ongkir = calculateOngkir();
 
     document.getElementById("subtotalValue").textContent =
         "Rp " + subtotal.toLocaleString("id-ID");
@@ -118,6 +118,7 @@ document.getElementById("btnPlaceOrder").addEventListener("click", () => {
     window.location.href = "success.html";
   }, 200);
 });
+
 
 
 
