@@ -1,705 +1,149 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mini E-Store - Killow's Gooning Space</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SFOTH Homepage</title>
 
-  <!-- FAVICON -->
-  <link rel="icon" type="image/png" href="malewife.png" />
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Mini E-Store — Variasi (Pink Soft)</title>
 <style>
-  :root{
-    --primary:#ff7eb9; /* pink soft */
-    --primary-dark:#ff4fa6;
-    --bg:#f7f7fb;
-    --card:#ffffff;
-    --text:#111827;
-    --muted:#6b7280;
-    --max-width:1150px;
-    --radius:14px;
-  }
-  *{box-sizing:border-box}
-  body{margin:0;font-family:Inter, system-ui, Arial, sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
-  header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:linear-gradient(180deg,rgba(0,0,0,0.02),transparent);position:sticky;top:0;z-index:70}
-  .brand{display:flex;gap:12px;align-items:center}
-  .burger{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--card);box-shadow:0 4px 14px rgba(15,23,42,0.06);cursor:pointer}
-  .brand-name{font-weight:700;font-size:18px}
-  .top-controls{display:flex;gap:10px;align-items:center}
+    body {
+        margin: 0;
+        padding: 0;
+        background: url("sfoth.png") no-repeat center center fixed;
+        background-size: cover;
+        font-family: Georgia, serif;
+        text-align: center;
+        color: #ffcc33;
+    }
 
-  /* search + sort */
-  .search-wrap{display:flex;gap:10px;align-items:center}
-  .search-input{padding:10px 12px;border-radius:10px;border:1px solid #e6e9ee;width:220px}
-  .sort-select{padding:10px;border-radius:10px;border:1px solid #e6e9ee}
+    /* Center wrapper */
+    .container {
+        margin-top: 40px;
+    }
 
-  /* layout */
-  .main {max-width:var(--max-width);margin:18px auto;padding:0 16px;display:grid;grid-template-columns: 1fr;gap:18px}
-  .hero {
-    width: 100%;
-    margin: 20px 0;
-    border-radius: 12px;
-    overflow: hidden;
-}
+    /* Circular icon */
+    .fire-icon {
+        width: 260px;
+        height: 260px;
+        object-fit: cover;
+        border-radius: 50%;
+        padding: 10px;
+        background: linear-gradient(45deg, yellow, orange, red);
+        animation: pulseFire 2.5s infinite ease-in-out;
+    }
 
-.hero img {
-    width: 100%;
-    display: block;
-    border-radius: 12px;
-}
-  
-.hero-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 28px;
-    font-weight: 700;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-    text-align: center;
-    width: 90%;
-}  
-  .content{display:flex;gap:18px}
+    /* Fire glow animation */
+    @keyframes pulseFire {
+        0% {
+            box-shadow:
+                0 0 10px rgba(255, 160, 0, 0.7),
+                0 0 25px rgba(255, 60, 0, 0.7);
+        }
+        50% {
+            box-shadow:
+                0 0 25px rgba(255, 200, 0, 1),
+                0 0 55px rgba(255, 80, 0, 1),
+                0 0 85px rgba(255, 20, 0, 0.9);
+        }
+        100% {
+            box-shadow:
+                0 0 10px rgba(255, 160, 0, 0.7),
+                0 0 25px rgba(255, 60, 0, 0.7);
+        }
+    }
 
-  /* products grid */
-  .products {display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;width:100%}
-  .product {background:var(--card);padding:12px;border-radius:12px;box-shadow:0 6px 18px rgba(14,20,31,0.04);display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden}
-  .badge{position:absolute;left:12px;top:12px;background:var(--primary);color:white;padding:6px 8px;border-radius:999px;font-size:12px}
-  .product img{width:100%;max-width:500px;height:500px;object-fit:cover;border-radius:12px;display:block;margin:0 auto;background:#f0f0f0}
-  .prod-title{font-size:16px;font-weight:600;margin:0}
-  .prod-desc{font-size:13px;color:var(--muted);margin:0}
-  .prod-row{display:flex;justify-content:space-between;align-items:center;gap:8px}
-  .price{font-weight:700}
-  .actions{display:flex;gap:8px;align-items:center}
-  .btn{background:var(--primary);color:white;padding:9px 12px;border-radius:10px;border:0;cursor:pointer;font-weight:600}
-  .btn:hover{background:var(--primary-dark)}
-  .ghost{background:transparent;border:1px solid #e6e9ee;padding:9px 12px;border-radius:10px;cursor:pointer}
+    /* Title text */
+    h1 {
+        font-size: 40px;
+        margin-top: 20px;
+        text-shadow: 2px 2px 10px black;
+        color: #ffcc00;
+    }
 
-  /* sidebar slide */
-  #sidebar{position:fixed;left:-320px;top:0;width:320px;height:100vh;background:var(--card);box-shadow:8px 0 40px rgba(0,0,0,0.12);z-index:100;transition:left .34s;padding:18px;display:flex;flex-direction:column;gap:12px}
-  #sidebar.open{left:0}
-  .sidebar-close{align-self:flex-end;background:transparent;border:0;font-size:18px;cursor:pointer}
-  .cat-list{display:flex;flex-direction:column;gap:8px}
-  .cat-item{padding:10px;border-radius:8px;cursor:pointer;border:1px solid transparent}
-  .cat-item.active{background:#faf7fb;border-color:#f0e9f4}
+    /* Button container */
+    .buttons {
+        margin-top: 40px;
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+    }
 
-  /* side cart */
-  #sideCart{position:fixed;right:-420px;top:0;width:400px;height:100vh;background:var(--card);box-shadow:-12px 0 40px rgba(0,0,0,0.12);z-index:110;transition:right .34s;padding:16px;overflow:auto}
-  #sideCart.open{ right:0 }
-  .cart-item{display:flex;gap:10px;align-items:center;padding:8px;border-radius:8px;border:1px solid #f0f0f0}
-  .cart-item img{width:72px;height:72px;object-fit:cover;border-radius:8px}
-  .qty-input{width:64px;padding:6px;border-radius:8px;border:1px solid #e6e9ee;text-align:center}
+    /* Buttons */
+    .btn-box {
+        width: 180px;
+        height: 120px;
+        border: 6px solid;
+        border-image: linear-gradient(to bottom right, yellow, orange, red) 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 26px;
+        font-weight: bold;
+        color: #ffdd55;
+        background: rgba(0,0,0,0.4);
+        border-radius: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
 
-  /* floating cart button */
-  .cart-btn{position:fixed;right:18px;bottom:18px;background:var(--primary);color:white;padding:12px 14px;border-radius:999px;box-shadow:0 10px 30px rgba(0,0,0,0.18);cursor:pointer;z-index:90}
+    .btn-box:hover {
+        transform: scale(1.07);
+        box-shadow: 0 0 25px rgba(255,160,0,0.8);
+    }
 
-  /* toast */
-  .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:110px;background:rgba(0,0,0,0.8);color:white;padding:10px 14px;border-radius:8px;z-index:999;opacity:0;transition:opacity .2s}
-  .toast.show{opacity:1}
+    .shop-btn-fire {
+       background: linear-gradient(45deg, #ffda44, #ff8c00, #ff3300, #cc0000);
+       background-size: 400% 400%;
+       color: #ffe8b0;
+       text-shadow: 0 0 8px #ffdd66, 0 0 14px #ff5500;
+       animation: fireGradient 4s ease infinite, firePulse 2s infinite ease-in-out;
+   }
 
-  footer{text-align:center;color:var(--muted);padding:28px 12px}
+   /* Shiny moving gradient */
+   @keyframes fireGradient {
+       0% { background-position: 0% 50%; }
+       50% { background-position: 100% 50%; }
+       100% { background-position: 0% 50%; }
+   }
 
-  /* VARIATION MODAL (E-Store Pink Soft) */
-  .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.45);display:none;align-items:center;justify-content:center;z-index:200}
-  .modal-card{width:94%;max-width:760px;background:var(--card);border-radius:20px;padding:18px;box-shadow:0 30px 80px rgba(20,20,40,0.25);display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  .modal-card img{width:100%;height:320px;object-fit:cover;border-radius:12px}
-  .modal-meta h3{margin:0 0 6px 0}
-  .variant-group{margin-top:10px}
-  .variant-title{font-size:13px;color:var(--muted);margin-bottom:8px}
-  .variant-list{display:flex;flex-wrap:wrap;gap:8px}
-  .variant-item{padding:8px 12px;border-radius:999px;border:1px solid #eee;background:#fff;cursor:pointer}
-  .variant-item.active{border-color:var(--primary);box-shadow:0 6px 24px rgba(255,126,185,0.12);background:linear-gradient(180deg,#fff,#fff)}
-  .modal-footer{display:flex;align-items:center;justify-content:space-between;margin-top:12px;grid-column:1 / -1}
-  .qty-small{display:flex;gap:8px;align-items:center}
-  .qty-small button{padding:6px 8px;border-radius:8px;border:1px solid #eee;background:#fff;cursor:pointer}
-  .price-big{font-weight:800;font-size:20px;color:var(--primary-dark)}
+   /* Flickering glow */
+   @keyframes firePulse {
+       0% { box-shadow: 0 0 15px #ff5500; }
+       50% { box-shadow: 0 0 40px #ffaa00, 0 0 80px #ff3300; }
+       100% { box-shadow: 0 0 15px #ff5500; }
+   }
 
-  @media (max-width:900px){
-    .modal-card{grid-template-columns:1fr; padding:14px}
-    .modal-card img{height:220px}
-    .product img{height:380px}
-    #sidebar{width:100%;left:-100%}
-    #sideCart{width:100%;right:-100%}
-    #searchInput{width:140px}
-  }
-/* === HERO BANNER FIX === */
-.hero {
-    padding: 0 !important;
-    margin-top: 20px;
-    text-align: center;
-}
-
-.hero img {
-    width: 100%;
-    max-height: 280px;
-    border-radius: 15px;
-    object-fit: cover;
-}
-  
-.hero-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 28px;
-    font-weight: 700;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-    text-align: center;
-    width: 90%;
-}
-  
+   .shop-btn-fire:hover {
+       transform: scale(1.12);
+   }
 </style>
+
 </head>
+
 <body>
 
-<header>
-  <div class="brand">
-    <div class="burger" onclick="toggleSidebar()" title="Menu">
-      <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="20" height="2" rx="1" fill="#111827"></rect>
-        <rect y="6" width="14" height="2" rx="1" fill="#111827"></rect>
-        <rect y="12" width="8" height="2" rx="1" fill="#111827"></rect>
-      </svg>
-    </div>
-    <div>
-      <div class="brand-name">Mini E-Store</div>
-      <div style="font-size:12px;color:var(--muted)">Belanja aman & gampang</div>
-    </div>
-  </div>
+<div class="container">
 
-  <div class="top-controls">
-    <div class="search-wrap">
-      <input id="searchInput" class="search-input" placeholder="Cari produk..." aria-label="Cari produk">
-      <select id="sortSelect" class="sort-select" aria-label="Sort produk">
-        <option value="recommended">Sort: Recommended</option>
-        <option value="price-asc">Harga: Termurah</option>
-        <option value="price-desc">Harga: Termahal</option>
-        <option value="name-asc">Nama A → Z</option>
-        <option value="name-desc">Nama Z → A</option>
-      </select>
+    <!-- Your SFOTH icon image -->
+    <img class="fire-icon" src="telamon.png" alt="Icon">
+
+    <h1>Welcome to SFOTH</h1>
+
+    <div class="buttons">
+        <a href="about.html">
+            <div class="btn-box">About<br>me</div>
+        </a>
+
+        <a href="shop.html">
+            <div class="btn-box shop-btn-fire">SHOP</div>
+        </a>
+
+        <a href="#">
+            <div class="btn-box">click me</div>
+        </a>
     </div>
 
-    <button class="ghost" onclick="openSideCart()" title="Buka Keranjang">🛒 <span id="cartCountTop">0</span></button>
-  </div>
-</header>
-
-<!-- SIDEBAR -->
-<!-- SIDEBAR -->
-<aside id="sidebar" aria-hidden="true">
-  <button class="sidebar-close" onclick="toggleSidebar()">✕</button>
-  
-  <h3>Kategori</h3>
-  <div class="cat-list" id="catList"></div>
-  
-  <hr style="border:none;border-top:1px dashed #eee">
-
-  <h4>Info</h4>
-  <p class="small" style="color:var(--muted);font-size:13px">
-    If this ain't giving me A i'm crashing out.
-  </p>
-
-  <!-- ✨ NEW LINKS HERE -->
-  <a href="aboutme.html" class="info-link">About Me</a>
-  <a href="faq.html" class="info-link">FAQ</a>
-  <a href="contact.html" class="info-link">Contact</a>
-</aside>
-
-<!-- SIDE CART -->
-<aside id="sideCart" aria-hidden="true">
-  <div class="cart-head">
-    <div>
-      <h3 style="margin:0">Keranjang</h3>
-      <div class="small" style="color:var(--muted)"><span id="cartItemsCount">0</span> item</div>
-    </div>
-    <div style="display:flex;gap:8px;align-items:center">
-      <button class="ghost" onclick="clearCart()">Clear</button>
-      <button class="ghost" onclick="closeSideCart()">Close</button>
-    </div>
-  </div>
-
-  <div class="cart-items" id="cartItemsList"></div>
-
-  <div style="margin-top:14px;border-top:1px solid #f0f0f0;padding-top:12px">
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <div class="small">Subtotal</div>
-      <div style="font-weight:700" id="cartTotal">Rp 0</div>
-    </div>
-    <div style="margin-top:12px;display:flex;gap:8px">
-      <button class="btn" onclick="goCheckout()">Checkout</button>
-      <button class="ghost" onclick="closeSideCart()">Continue Shopping</button>
-    </div>
-    <div id="orderMsg" style="margin-top:8px;color:green;font-size:13px"></div>
-  </div>
-</aside>
-
-<main class="main">
-  <div class="hero">
-    <img src="yixi.jpg" alt="Banner">
-    <div class="hero-text">Promo Hari Ini — Diskon Spesial</div>
 </div>
 
-  <section class="content">
-    <div style="flex:1">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-        <h2 style="margin:0">Etalase Produk</h2>
-        <div style="font-size:13px;color:var(--muted)">Edit lewat kode → buka file HTML</div>
-      </div>
-
-      <div id="productsGrid" class="products" aria-live="polite">
-        <!-- produk dirender lewat JS -->
-      </div>
-    </div>
-  </section>
-</main>
-
-<!-- floating cart button -->
-<button class="cart-btn" onclick="openSideCart()">🛒 <span id="cartCountFloat">0</span></button>
-
-<!-- VARIATION MODAL (E-STORE PINK SOFT) -->
-<div id="varModal" class="modal-backdrop" onclick="closeVarModal(event)">
-  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle" onclick="event.stopPropagation()">
-    <img id="modalImage" src="" alt="produk" />
-    <div class="modal-meta">
-      <h3 id="modalTitle"></h3>
-      <div class="small" id="modalDesc"></div>
-
-      <div class="variant-group">
-        <div class="variant-title">Pilih Ukuran</div>
-        <div id="varSizeList" class="variant-list"></div>
-      </div>
-
-      <div class="variant-group">
-        <div class="variant-title">Pilih Rasa</div>
-        <div id="varTasteList" class="variant-list"></div>
-      </div>
-
-      <div style="margin-top:12px;display:flex;gap:10px;align-items:center;">
-        <div class="qty-small">
-          <div class="small">Qty</div>
-          <div style="display:flex;gap:8px;align-items:center;margin-left:8px">
-            <button onclick="changeModalQty(-1)">−</button>
-            <input id="modalQty" type="number" value="1" min="1" style="width:56px;padding:6px;border-radius:8px;border:1px solid #eee;text-align:center" />
-            <button onclick="changeModalQty(1)">+</button>
-          </div>
-        </div>
-        <div style="margin-left:auto" class="price-big" id="modalPrice">Rp 0</div>
-      </div>
-
-      <div class="modal-footer">
-        <button class="ghost" onclick="closeVarModal()">Batal</button>
-        <button class="btn" id="modalAddBtn">Tambah ke Keranjang</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div id="toast" class="toast" role="status" aria-live="polite"></div>
-<footer>Made with the power of delulu (and ChatGPT) ✨</footer>
-
-<script>
-/* ========== PRODUCTS DATA (edit di sini) ==========
- - For Keripik Pisang (id:5) we include variations
- - Upload HD images (1000x1000) and set image file names
-==================================================*/
-const productsData = [
-  {id:1, title:"Sneaker Classic", price:80000, basePrice:80000, category:"shoes", image:"bald.jpg", desc:"Pls free me from this.", badge:"NEW",
-    variations: {
-      ukuran: [
-        {name:"S", addPrice:0},
-        {name:"M", addPrice:5000},
-        {name:"L", addPrice:15000}
-      ],
-      warna: ["Putih","Hitam","Coklat","Abu-Abu","Navy","Merah","Cream","Request"]
-    }
-  },
-  {id:2, title:"Casual Loafers", price:90000, basePrice:90000, category:"shoes", image:"letsky.jpg", desc:"Telamon hi.", badge:"NEW",
-    variations: {
-      ukuran: [
-        {name:"S", addPrice:0},
-        {name:"M", addPrice:5000},
-        {name:"L", addPrice:15000}
-      ],
-      warna: ["Putih","Hitam","Coklat","Abu-Abu","Navy","Merah","Cream","Request"]
-    }
-  },
-  {id:3, title:"Sport Runner", price:150000, basePrice:150000, category:"shoes", image:"seven.jpg", desc:"OH MY GOD HE'S HOT.", badge:"SALE",
-    variations: {
-      ukuran: [
-        {name:"S", addPrice:0},
-        {name:"M", addPrice:10000},
-        {name:"L", addPrice:20000}
-      ],
-      warna: ["Putih","Hitam","Coklat","Abu-Abu","Navy","Merah","Cream","Request"]
-    }
-  },
-  {id:4, title:"Tas Rajut Handmade", price:120000, basePrice:120000, category:"accessories", image:"ensven.jpg", desc:"Handmade creation, unique design.", badge:null,
-    variations: {
-      model: [
-        {name:"Pouch", addPrice:0},
-        {name:"Bag", addPrice:15000},
-        {name:"Ransel", addPrice:30000}
-      ],
-      benang: [
-        {name:"Wol", addPrice:0},
-        {name:"Polyester", addPrice:20000},
-        {name:"Katun", addPrice:25000}
-      ],
-      warna: ["Merah","Jingga","Kuning","Hijau","Biru","Ungu","Pink","Abu-Abu","Hitam","Putih","Custom"]
-    }
-  },
-  {id:5, title:"Keripik Pisang", price:12000, basePrice:12000, category:"food and beverages", image:"guest.jpg", desc:"Crispy banana chips.", badge:null,
-    variations: {
-      ukuran: [
-        {name:"Kecil (jomblo)", addPrice:0},
-        {name:"Sedang (couple)", addPrice:3000},
-        {name:"Besar (family)", addPrice:7000}
-      ],
-      rasa: ["Original","Balado","Coklat","Matcha"]
-    }
-  },
-  {id:6, title:"Es Teh Manis", price:5000, basePrice:5000, category:"food and beverages", image:"jason.jpg", desc:"Fresh tea :D", badge:null}
-];
-
-/* ========== STATE ========== */
-let cart = JSON.parse(localStorage.getItem('mini_cart_vl')||'[]');
-let categories = [...new Set(productsData.map(p=>p.category))];
-
-/* ========== HELPERS ========== */
-function formatRp(v){
-  if(typeof v === 'number') return 'Rp ' + v.toLocaleString('id-ID');
-  // if decimal (previous prices like 29.99)
-  const n = Number(v);
-  if(isNaN(n)) return v;
-  return 'Rp ' + Math.round(n).toLocaleString('id-ID');
-}
-function showToast(msg){
-  const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2200);
-}
-
-/* ========== SIDEBAR ========== */
-function toggleSidebar(){ const s = document.getElementById('sidebar'); const open = s.classList.toggle('open'); s.setAttribute('aria-hidden', String(!open)); }
-
-/* ========== PRODUCTS RENDER & FILTER & SORT ========= */
-function renderCategories(){
-  const ct = document.getElementById('catList'); ct.innerHTML = '';
-  const allEl = document.createElement('div'); allEl.className='cat-item active'; allEl.textContent='Semua Kategori'; allEl.dataset.cat='all'; allEl.onclick = ()=>{ selectCategory('all'); }; ct.appendChild(allEl);
-  categories.forEach(c=>{
-    const el = document.createElement('div'); el.className='cat-item'; el.textContent = c.charAt(0).toUpperCase() + c.slice(1); el.dataset.cat = c; el.onclick = ()=>{ selectCategory(c); }; ct.appendChild(el);
-  });
-  document.querySelectorAll('.cat-item').forEach(x=>x.classList.remove('active'));
-  document.querySelector('.cat-item[data-cat="all"]').classList.add('active');
-}
-
-let currentCategory = 'all';
-function selectCategory(cat){
-  currentCategory = cat;
-  document.querySelectorAll('.cat-item').forEach(x=>x.classList.toggle('active', x.dataset.cat===cat));
-  applyFilters();
-  toggleSidebar();
-}
-
-function renderProducts(list){
-  const grid = document.getElementById('productsGrid'); grid.innerHTML = '';
-  list.forEach(p=>{
-    const el = document.createElement('div'); el.className = 'product';
-    el.innerHTML = `
-      ${p.badge ? `<div class="badge">${escapeHtml(p.badge)}</div>` : ''}
-      <img src="${p.image}" alt="${escapeHtml(p.title)}" onclick="openProduct(${p.id})" />
-      <h3 class="prod-title">${escapeHtml(p.title)}</h3>
-      <p class="prod-desc">${escapeHtml(p.desc)}</p>
-      <div class="prod-row">
-        <div class="price">${p.variations ? formatRp(p.basePrice || p.price) : formatRp(p.price)}</div>
-        <div class="actions">
-          <input type="number" id="qty-inline-${p.id}" value="1" min="1" class="qty-input" style="width:64px;padding:6px;border-radius:8px;border:1px solid #e6e9ee" />
-          <button class="btn" onclick="handleAddClick(${p.id})">Add</button>
-        </div>
-      </div>
-    `;
-    grid.appendChild(el);
-  });
-}
-
-/* Combine search/sort/category */
-function applyFilters(){
-  const q = (document.getElementById('searchInput').value || '').trim().toLowerCase();
-  const sortBy = document.getElementById('sortSelect').value;
-  let items = productsData.slice();
-  if(currentCategory !== 'all') items = items.filter(i=>i.category === currentCategory);
-  if(q) items = items.filter(i => i.title.toLowerCase().includes(q) || (i.desc && i.desc.toLowerCase().includes(q)));
-  if(sortBy === 'price-asc') items.sort((a,b)=>(a.basePrice||a.price)-(b.basePrice||b.price));
-  else if(sortBy === 'price-desc') items.sort((a,b)=>(b.basePrice||b.price)-(a.basePrice||a.price));
-  else if(sortBy === 'name-asc') items.sort((a,b)=>a.title.localeCompare(b.title));
-  else if(sortBy === 'name-desc') items.sort((a,b)=>b.title.localeCompare(a.title));
-  renderProducts(items);
-}
-
-/* quick product preview (simple) */
-function openProduct(id){ const p = productsData.find(x=>x.id===id); if(!p) return; alert(`${p.title}\n\n${p.desc}\n\nHarga: ${p.variations ? formatRp(p.basePrice||p.price) : formatRp(p.price)}`); }
-
-/* ========== VARIATION MODAL LOGIC ========== */
-/* ========== VARIATION MODAL (DYNAMIC VERSION) ========== */
-
-const modal = document.getElementById('varModal');
-let modalState = {
-  productId: null,
-  qty: 1,
-  selected: {} // dynamic: ukuran, rasa, warna, model, benang, etc
-};
-
-function handleAddClick(id){
-  const p = productsData.find(x=>x.id===id);
-  if(!p) return;
-
-  if(p.variations){
-    openVarModal(id);
-  } else {
-    const qty = Math.max(1, parseInt(document.getElementById('qty-inline-'+id)?.value || 1));
-    cart.push({
-      id:p.id,
-      title:p.title,
-      price:p.price,
-      qty:qty,
-      image:p.image,
-      variant:{}
-    });
-    saveCart();
-    showToast(`${p.title} added to ur list (${qty})`);
-  }
-}
-
-function openVarModal(id){
-  const p = productsData.find(x=>x.id===id);
-  if(!p || !p.variations) return;
-
-  modalState.productId = id;
-  modalState.qty = 1;
-  modalState.selected = {};
-
-  document.getElementById('modalImage').src = p.image;
-  document.getElementById('modalTitle').textContent = p.title;
-  document.getElementById('modalDesc').textContent = p.desc || '';
-  document.getElementById('modalQty').value = 1;
-
-  // clear previous variant UI
-  document.getElementById('varSizeList').innerHTML = '';
-  document.getElementById('varTasteList').innerHTML = '';
-
-  // dynamic rendering area
-  const meta = document.querySelector('.modal-meta');
-  meta.querySelectorAll('.variant-group.dynamic').forEach(x=>x.remove());
-
-  // generate dynamic variation groups
-  Object.keys(p.variations).forEach(key => {
-    const group = document.createElement('div');
-    group.className = "variant-group dynamic";
-
-    const title = document.createElement('div');
-    title.className = "variant-title";
-    title.textContent = "Pilih " + key.charAt(0).toUpperCase() + key.slice(1);
-
-    const list = document.createElement('div');
-    list.className = "variant-list";
-
-    const options = p.variations[key];
-
-    options.forEach((opt, idx)=>{
-      const item = document.createElement('div');
-      item.className = "variant-item" + (idx === 0 ? " active" : "");
-
-      // unify text value
-      const label = typeof opt === "string" ? opt : opt.name;
-      item.textContent = label;
-
-      item.onclick = ()=>{
-        modalState.selected[key] = opt;
-        list.querySelectorAll('.variant-item').forEach(e=>e.classList.remove('active'));
-        item.classList.add('active');
-        updateModalPrice();
-      };
-
-      if(idx === 0) modalState.selected[key] = opt;
-
-      list.appendChild(item);
-    });
-
-    group.appendChild(title);
-    group.appendChild(list);
-    meta.insertBefore(group, meta.querySelector('.modal-footer'));
-  });
-
-  updateModalPrice();
-  modal.style.display = 'flex';
-}
-
-function closeVarModal(){
-  modal.style.display = 'none';
-}
-
-function changeModalQty(delta){
-  let el = document.getElementById('modalQty');
-  let v = Math.max(1, parseInt(el.value || 1) + delta);
-  el.value = v;
-  modalState.qty = v;
-  updateModalPrice();
-}
-
-document.getElementById('modalQty').addEventListener('input', (e)=>{
-  modalState.qty = Math.max(1, parseInt(e.target.value||1));
-  updateModalPrice();
-});
-
-function updateModalPrice(){
-  const p = productsData.find(x=>x.id===modalState.productId);
-  if(!p) return;
-
-  let price = p.basePrice || p.price;
-
-  // apply additional price from selected variations
-  Object.values(modalState.selected).forEach(opt=>{
-    if(typeof opt === 'object' && opt.addPrice){
-      price += opt.addPrice;
-    }
-  });
-
-  const total = price * modalState.qty;
-  document.getElementById('modalPrice').textContent = formatRp(total);
-
-  document.getElementById('modalAddBtn').onclick = ()=> modalAddToCart(p.id, price);
-}
-
-function modalAddToCart(id, unitPrice){
-  const p = productsData.find(x=>x.id===id);
-  if(!p) return;
-
-  const qty = modalState.qty;
-  const variantLabels = {};
-
-  Object.keys(modalState.selected).forEach(key=>{
-    const opt = modalState.selected[key];
-    variantLabels[key] = typeof opt === 'string' ? opt : opt.name;
-  });
-
-  cart.push({
-    id:p.id,
-    title:p.title,
-    price:unitPrice,
-    qty:qty,
-    image:p.image,
-    variant: variantLabels
-  });
-
-  saveCart();
-  showToast(`${p.title} added to ur list (${qty})`);
-  closeVarModal();
-}
-
-/* ========== CART FUNCTIONS ========== */
-function saveCart(){ localStorage.setItem('mini_cart_v1', JSON.stringify(cart)); updateCartUI(); }
-
-function updateCartUI(){
-  const list = document.getElementById('cartItemsList'); list.innerHTML = '';
-  let total = 0;
-  cart.forEach((item, index)=>{
-    total += item.price * item.qty;
-    const node = document.createElement('div'); node.className = 'cart-item';
-    node.innerHTML = `
-      <img src="${item.image}" alt="${escapeHtml(item.title)}" />
-      <div class="cart-meta">
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <strong>${escapeHtml(item.title)}</strong>
-          <div class="small">${formatRp(item.price)}</div>
-        </div>
-        <div class="small" style="margin-top:6px">${item.variant && item.variant.ukuran ? escapeHtml(item.variant.ukuran) : ''}${item.variant && item.variant.rasa ? ' • ' + escapeHtml(item.variant.rasa) : ''}</div>
-        <div class="cart-controls">
-          <input type="number" value="${item.qty}" min="1" class="qty-input" onchange="changeQty(${index}, this.value)" />
-          <button class="ghost" onclick="removeItem(${index})">Remove</button>
-        </div>
-      </div>
-    `;
-    list.appendChild(node);
-  });
-  document.getElementById('cartTotal').textContent = formatRp(total);
-  const count = cart.reduce((s,i)=>s+i.qty,0);
-  document.getElementById('cartCountTop').textContent = count;
-  document.getElementById('cartCountFloat').textContent = count;
-  document.getElementById('cartItemsCount').textContent = count;
-}
-
-function changeQty(index, val){
-  const q = Math.max(1, parseInt(val)||1);
-  if(cart[index]){ cart[index].qty = q; saveCart(); }
-}
-function removeItem(index){ cart.splice(index,1); saveCart(); showToast('i hacked ur item its no longer exist xp'); }
-function clearCart(){ if(!confirm('clear ur cart?')) return; cart = []; saveCart(); showToast('ok done go shop'); }
-
-function openSideCart(){ document.getElementById('sideCart').classList.add('open'); document.getElementById('sideCart').setAttribute('aria-hidden','false'); updateCartUI(); }
-function closeSideCart(){ document.getElementById('sideCart').classList.remove('open'); document.getElementById('sideCart').setAttribute('aria-hidden','true'); }
-
-function placeOrder(){
-  if(cart.length===0){ alert('Keranjang kosong.'); return; }
-  const order = { id:'ORD'+Date.now(), items:cart, total:cart.reduce((s,i)=>s+i.price*i.qty,0), date:new Date().toISOString() };
-  const hist = JSON.parse(localStorage.getItem('mini_orders_v1')||'[]'); hist.push(order); localStorage.setItem('mini_orders_v1', JSON.stringify(hist));
-  cart = []; saveCart();
-  updateCartUI();
-  document.getElementById('orderMsg').textContent = `Order sukses! ID ${order.id}`;
-  showToast('Order berhasil! ID: '+order.id);
-}
-
-/* ========== UTIL & EVENTS ========== */
-function escapeHtml(str){ return String(str||'').replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; }); }
-document.getElementById('searchInput').addEventListener('input', ()=>applyFilters());
-document.getElementById('sortSelect').addEventListener('change', ()=>applyFilters());
-
-/* init */
-renderCategories();
-applyFilters();
-updateCartUI();
-
-function goCheckout() {
-  const cart = JSON.parse(localStorage.getItem("mini_cart_v1")) || [];
-
-  if (!cart || cart.length === 0) {
-    alert("what r u buying, choose some items xp");
-    return;
-  }
-  
-  window.location.href = "checkout.html";
-}
-  
-/* UX niceties */
-document.addEventListener('click', (e)=>{
-  const sidebar = document.getElementById('sidebar');
-  const burger = document.querySelector('.burger');
-  if(sidebar.classList.contains('open') && !sidebar.contains(e.target) && !burger.contains(e.target)){
-    sidebar.classList.remove('open');
-  }
-});
-document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ document.getElementById('sidebar').classList.remove('open'); closeSideCart(); closeVarModal(); } });
-</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
