@@ -36,7 +36,7 @@ function getDistanceKm(lat1, lng1, lat2, lng2) {
 
 // DOM elements
 const orderItemsEl = document.getElementById("orderItems");
-const subtotalEl = document.getElementById("subtotal");
+const subtotalEl = document.getElementById("subtotalValue");
 const totalAkhirEl = document.getElementById("totalAkhir");
 
 let subtotal = 0;
@@ -82,6 +82,8 @@ function updateTotal() {
         "Rp " + ongkir.toLocaleString("id-ID");
 }
 
+  updateTotal()
+
 // --- ORDER BUTTON ---
 document.getElementById("btnPlaceOrder").addEventListener("click", () => {
     const nama = document.getElementById("nama").value.trim();
@@ -104,6 +106,7 @@ document.getElementById("btnPlaceOrder").addEventListener("click", () => {
     window.location.href = "success.html";
   }, 200);
 });
+
 
 
 
