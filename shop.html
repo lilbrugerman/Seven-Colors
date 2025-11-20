@@ -607,13 +607,17 @@ function modalAddToCart(id, unitPrice){
     closeVarModal();
 }
 
-
 /* ========== CART FUNCTIONS ========== */
 function saveCart(){ localStorage.setItem('mini_cart_v1', JSON.stringify(cart)); updateCartUI(); }
 
 function updateCartUI(){
-  const list = document.getElementById('cartItemsList'); list.innerHTML = '';
-  let total = 0;
+    const list = document.getElementById('cartItemsList'); 
+    list.innerHTML = '';
+
+    // 🔥 load cart dari localStorage
+    let cart = JSON.parse(localStorage.getItem('mini_cart_v1')) || [];
+
+    let total = 0;
   cart.forEach((item, index)=>{
     total += item.price * item.qty;
     const node = document.createElement('div'); node.className = 'cart-item';
@@ -693,6 +697,7 @@ document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ document.getEl
 </script>
 </body>
 </html>
+
 
 
 
