@@ -617,22 +617,6 @@ function chooseMood(msg) {
         return "answering";
     }
 
-    // UNCERTAIN / SHORT / “hmm??”
-    if (
-        msg.length <= 3 ||
-        msg.endsWith("...") ||
-        msg.includes("maybe") ||
-        msg.includes("idk") ||
-        msg.includes("hm") ||
-        msg.includes("hmm") ||
-        msg.includes("uh") ||
-        msg.includes("wait") ||
-        msg.includes("what do you mean") ||
-        (msg.split(" ").length <= 2 && !msg.includes("you"))
-    ) {
-        return "questioning";
-    }
-
     // THREATENING
     if (
         msg.includes("hate") ||
@@ -656,6 +640,21 @@ function chooseMood(msg) {
         msg.includes("help")
     ) {
         return "caring";
+    }
+
+ if (
+        msg.length <= 3 ||
+        msg.endsWith("...") ||
+        msg.includes("maybe") ||
+        msg.includes("idk") ||
+        msg.includes("hm") ||
+        msg.includes("hmm") ||
+        msg.includes("uh") ||
+        msg.includes("wait") ||
+        msg.includes("what do you mean") ||
+        (msg.split(" ").length <= 2 && !msg.includes("you"))
+    ) {
+        return "questioning";
     }
 
     return "neutral";
@@ -771,6 +770,7 @@ if (
 
 </body>
 </html>
+
 
 
 
