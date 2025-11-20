@@ -217,64 +217,54 @@
 
   @media (max-width: 600px) {
     body {
-     background: url("void.png") no-repeat center center; 
-     background-size: cover;
-      background-attachment: scroll;
-      padding: 20px 10px;
+        background: url("void.png") no-repeat center center;
+        background-size: cover;
+        background-attachment: scroll;
+        padding: 20px 10px;
     }
 
     .noli-icon {
-      width: 140px;
-      height: 140px;
-      box-shadow: 0 0 20px #8b33ffaa;
+        width: 140px;
+        height: 140px;
+        box-shadow: 0 0 20px #8b33ffaa;
     }
 
     .title {
-      font-size: 28px;
+        font-size: 28px;
     }
 
     .box {
-      font-size: 15px;
-      padding: 15px;
+        font-size: 15px;
+        padding: 15px;
     }
 
     a.back {
-      font-size: 16px;
+        font-size: 16px;
     }
 
-   .social-btn {
+    .social-btn {
         width: 85%;
         font-size: 16px;
         padding: 10px 14px;
     }
+
     .social-btn img {
         width: 24px;
         height: 24px;
     }
-   
-  .beloved {
-    display: block;
-    margin-top: 15 px;
-    margin-bottom: 20 px;
-    font-size: 0.9rem; /* slightly smaller text */
-    text-shadow: 0 0 4px #b56cff, 0 0 6px #d8a7ff; /* softer glow */
-  }
 
-  .beloved::before,
-  .beloved::after {
-    font-size: 8px; /* smaller sparkles */
-    opacity: .6;
-  }
+    .beloved {
+        display: block;
+        font-size: 0.9rem;
+        text-shadow: 0 0 4px #b56cff, 0 0 6px #d8a7ff;
+        padding: 6px 4px;
+    }
 
-  .beloved {
-    animation: voidPulse 4s infinite ease-in-out,
-               voidFlicker 7s infinite steps(12);
-  }
-
-@media (max-width: 600px) {
-  .beloved {
-    padding: 6px 4px;
-  }
+    .beloved::before,
+    .beloved::after {
+        font-size: 8px;
+        opacity: .6;
+    }
 }
 </style>
 </head>
@@ -382,6 +372,7 @@ animateParticles();
 
 </body>
 </html>
+
 
 
 
