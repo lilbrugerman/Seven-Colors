@@ -578,8 +578,8 @@ function modalAddToCart(id, unitPrice) {
     if (!p) return;
 
     const qty = modalState.qty;
-
     const variantLabels = {};
+  
     Object.keys(modalState.selected).forEach(key => {
         const opt = modalState.selected[key];
             variantLabels[key] = typeof opt === 'string' ? opt : opt.name;
@@ -597,8 +597,10 @@ function modalAddToCart(id, unitPrice) {
 
     // --- SAVE TO LOCALSTORAGE ---
    cart.push(cartItem);
+  
     saveCart()
     updateCartUI ();
+  
     showToast(`${cartItem.title} added to ur list (${qty})`);
     closeVarModal();
 }
@@ -691,6 +693,7 @@ document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ document.getEl
 </script>
 </body>
 </html>
+
 
 
 
