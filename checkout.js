@@ -1,6 +1,39 @@
 // --- GET CART FROM LOCALSTORAGE ---
 let cart = JSON.parse(localStorage.getItem('mini_cart_v1')) || [];
 
+// --- STORE LOCATION (UNSRI FE INDRALAYA) ---
+const STORE_LAT = -3.220300;
+const STORE_LNG = 104.650900;
+
+// --- Dummy geocoder: ubah alamat jadi koordinat fake ---
+function dummyGeocode(address) {
+    let hash = 0;
+    for (let i = 0; i < address.length; i++) {
+        hash += address.charCodeAt(i);
+    }
+
+    // Buat koordinat random tapi stabil
+    return {
+        lat: -3.22 + ((hash % 50) / 1000),   // range: -3.22 s/d -3.17
+        lng: 104.65 + ((hash % 50) / 1000)   // range: 104.65 s/d 104.70
+    };
+}
+
+// --- Haversine Formula (hitungan jarak km) ---
+function getDistanceKm(lat1, lng1, lat2, lng2) {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLng = (lng2 - lng1) * Math.PI / 180;
+
+    const a =
+        Math.sin(dLat/2) ** 2 +
+        Math.cos(lat1*Math.PI/180) *
+        Math.cos(lat2*Math.PI/180) *
+        Math.sin(dLng/2) ** 2;
+
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
 // DOM elements
 const orderItemsEl = document.getElementById("orderItems");
 const subtotalEl = document.getElementById("subtotal");
@@ -26,13 +59,46 @@ cart.forEach(item => {
 
 subtotalEl.textContent = `Rp ${subtotal.toLocaleString("id-ID")}`;
 
-const ongkir = 10000;
+function calculateOngkir() {
+    const address = document.getElementById("alamatLengkap").value.trim();
+    if (!address) return 5000; // default 5k
+
+    const userLoc = dummyGeocode(address);
+    const distance = getDistanceKm(STORE_LAT, STORE_LNG, userLoc.lat, userLoc.lng);
+
+    // Dummy formula: 5000 + 5000 per 100 km
+    const extra = Math.floor(distance / 100) * 5000;
+
+    return 5000 + extra;
+}
+
+function updateTotal() {
+    const ongkir = calculateOngkir();
+
+    totalAkhirEl.textContent =
+        "Rp " + (subtotal + ongkir).toLocaleString("id-ID");
+
+    document.getElementById("ongkirValue").textContent =
+        "Rp " + ongkir.toLocaleString("id-ID");
+}
+
+updateTotal();
 
 totalAkhirEl.textContent = `Rp ${(subtotal + ongkir).toLocaleString("id-ID")}`;
 
 // --- ORDER BUTTON ---
 document.getElementById("btnPlaceOrder").addEventListener("click", () => {
-  alert("yay u spent ur money on smth 🍔🎭");
+    const nama = document.getElementById("nama").value.trim();
+    const hp = document.getElementById("hp").value.trim();
+    const alamat = document.getElementById("alamat").value.trim();
+
+    // VALIDATION
+    if (!nama || !hp || !alamat) {
+        alert("do you REALLY think i know who u r. - n7");
+        return; // stop order
+    }
+
+    alert("yay u spent ur money on smth 🤸‍♀️💳");
 
   // Clear cart
   localStorage.removeItem("mini_cart_v1");
@@ -42,6 +108,7 @@ document.getElementById("btnPlaceOrder").addEventListener("click", () => {
     window.location.href = "success.html";
   }, 200);
 });
+
 
 
 
