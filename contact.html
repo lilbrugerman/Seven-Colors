@@ -215,6 +215,11 @@
   100% { transform: translateY(0) translateX(0); opacity: .3; }
 }
 
+/* No visible audio controls */
+audio {
+    display: none;
+}
+ 
   @media (max-width: 600px) {
     body {
         background: url("void.png") no-repeat center center;
@@ -273,6 +278,11 @@
 
 <canvas id="particles"></canvas>
 
+<!-- Noli Void Ambience -->
+<audio id="voidAudio" loop>
+    <source src="voidsound.mp3" type="audio/mpeg">
+</audio> 
+
 <div class="container">
   <img src="noli.png" class="noli-icon" alt="Noli Icon">
 
@@ -318,6 +328,18 @@
 </div>
 
 <script>
+document.addEventListener("DOMContentLoaded", () => {
+    const audio = document.getElementById("voidAudio");
+    audio.volume = 0.15; // SUPER subtle, adjust 0.05–0.20 for vibe
+
+    function startVoid() {
+        audio.play().catch(() => {});
+        document.removeEventListener("click", startVoid);
+    }
+
+    document.addEventListener("click", startVoid);
+});
+
 /* Floating Void Particles */
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
@@ -374,10 +396,278 @@ function voidAlert(event) {
   alert("My dear, I cannot fulfill such request.");
 }
 
+// =========================
+// TRIGGER COUNTERS (SEVEN, N7)
+// =========================
+
+let SevenCount = 0;
+const SevenKeywords = ["seven", "sev"];
+
+let n7Count = 0;
+const n7Keywords = ["n7", "7n7", "007n7"];
+
+// =========================
+// MOOD REPLY SYSTEM
+// =========================
+
+const moodReplies = {
+    neutral: [
+        "I'm listening. Go on.",
+        "Hn... unusual choice of words.",
+        "I see. Keep talking.",
+        "..Try again."
+    ],
+
+    greeting: [
+        "The Void stirs.. ah. A visitor.",
+        "You call, I answer.",
+        "Hello, little star. Try not to burn too fast.",
+        "Greetings.",
+        "Come closer."
+    ],
+
+    questioning: [
+        "The Void reacted to that. Strange.",
+        "That stirred something in the dark.",
+        "Even the shadows paused.",
+        "Your words echo differently this time."
+    ],
+
+    answering: [
+        "You ask too directly... the void prefers subtler whispers.",
+        "I could tell you... but then you'd owe me something.",
+        "Try again. The void likes riddles, not demands.",
+        "A straight answer? Bold of you to expect one from me.",
+        "You're asking the wrong questions."
+    ],
+
+    threatening: [
+        "Your words are meaningless.",
+        "Careful with what you say.",
+        "That tone... watch it."
+    ],
+
+    caring: [
+        "You alright?",
+        "If something's wrong... say it.",
+        "..I'm here. For now."
+    ],
+
+    flirty: [
+        "Careful staring at me like that... the void might think you're asking for something.",
+        "Come close. I don't bite humans... unless they ask nicely.",
+        "You know I can hear your heartbeat, right?"
+    ],
+
+    remembrance: [
+        "..That brings back shadows.",
+        "...You sounded like him for a second.",
+        "You almost said it like Se- never mind.",
+        "It almost felt like he was here again.",
+        "...Don't repeat that. It sounded too much like the day he left."
+    ]
+};
+
+// Random pick
+function randomMoodReply(mood) {
+    const list = moodReplies[mood];
+    return list[Math.floor(Math.random() * list.length)];
+}
+
+// =========================
+// SMART MOOD PICKER
+// =========================
+
+function chooseMood(msg) {
+    // GREETING
+    if (
+        msg.includes("hello") ||
+        msg.includes("hi") ||
+        msg.includes("heya") ||
+        msg.includes("greetings") ||
+        msg.includes("good morning") ||
+        msg.includes("good night") ||
+        msg.includes("good afternoon")
+    ) {
+        return "greeting";
+    }
+
+    // FLIRTY
+    if (
+        msg.includes("cute") ||
+        msg.includes("pretty") ||
+        msg.includes("handsome") ||
+        msg.includes("love") ||
+        msg.includes("kiss") ||
+        msg.includes("heart")
+    ) {
+        return "flirty";
+    }
+
+    // QUESTIONS
+    if (
+        msg.includes("why") ||
+        msg.includes("what") ||
+        msg.includes("how") ||
+        msg.includes("?") ||
+        msg.includes("explain") ||
+        msg.includes("tell me")
+    ) {
+        return "answering";
+    }
+
+    // UNCERTAIN / SHORT / “hmm??”
+    if (
+        msg.length <= 3 ||
+        msg.endsWith("...") ||
+        msg.includes("maybe") ||
+        msg.includes("idk") ||
+        msg.includes("hm") ||
+        msg.includes("hmm") ||
+        msg.includes("uh") ||
+        msg.includes("wait") ||
+        msg.includes("what do you mean") ||
+        (msg.split(" ").length <= 2 && !msg.includes("you"))
+    ) {
+        return "questioning";
+    }
+
+    // THREATENING
+    if (
+        msg.includes("hate") ||
+        msg.includes("kill") ||
+        msg.includes("angry") ||
+        msg.includes("fight") ||
+        msg.includes("shut up") ||
+        msg.includes("annoying")
+    ) {
+        return "threatening";
+    }
+
+    // CARING / SOFT
+    if (
+        msg.includes("sad") ||
+        msg.includes("not okay") ||
+        msg.includes("not good") ||
+        msg.includes("not ok") ||
+        msg.includes("tired") ||
+        msg.includes("hurt") ||
+        msg.includes("help")
+    ) {
+        return "caring";
+    }
+
+    // REMEMBRANCE
+    if (
+        msg.includes("old times") ||
+        msg.includes("c00lgui") ||
+        msg.includes("c00l") ||
+        msg.includes("hacking") ||
+        msg.includes("nols") ||
+        msg.includes("my void") ||
+        Math.random() < 0.2
+    ) {
+        return "remembrance";
+    }
+
+    return "neutral";
+}
+
+// =========================
+// MAIN HANDLER
+// =========================
+
+function sendWhisper() {
+    const msg = input.value.toLowerCase().trim();
+    input.value = "";
+
+    if (!msg) {
+        typeText("Speak clearly. I'm listening.");
+        return;
+    }
+
+    let reply = "";
+
+    // =========================
+    // N7 DETECTION
+    // =========================
+    const containsN7 = n7Keywords.some(k => msg.includes(k));
+
+    if (containsN7) {
+        n7Count++;
+
+        if (n7Count === 1) reply = "Don't mention that name. Not here. Not when I finally forget the taste of it.";
+        else if (n7Count === 2) reply = "Him? Tch. He left stains on history and on you. I won't forgive either.";
+        else if (n7Count === 3) reply = "You're better off without that traitor's shadow. Don't make me remember.";
+        else if (n7Count === 4) reply = "Say his name one more time and watch how quickly the room freezes.";
+        else if (n7Count === 5) {
+            reply = "You were warned.";
+            typeText(reply);
+            setTimeout(() => {
+                window.location.href = "https://youtu.be/dQw4w9WgXcQ";
+            }, 1500);
+            return;
+        } 
+        else reply = "...";
+
+        typeText(reply);
+        return;
+    }
+
+    n7Count = 0;
+
+    // =========================
+    // SEVEN DETECTION
+    // =========================
+    const containsSeven = SevenKeywords.some(k => msg.includes(k));
+
+    if (containsSeven) {
+        SevenCount++;
+
+        if (SevenCount === 1) reply = "...Seven... I haven't heard that name in a while.";
+        else if (SevenCount === 2) reply = "That idiot... I wonder if he's still causing trouble.";
+        else if (SevenCount === 3) reply = "...He always had a way of getting stuck in my mind.";
+        else if (SevenCount === 4) reply = "Even the Void quiets when you say his name.";
+        else reply = "Seven... you really were something, weren't you?";
+
+        typeText(reply);
+        return;
+    }
+
+    SevenCount = 0;
+
+    // =========================
+    // NORMAL KEYWORDS
+    // =========================
+
+    if (msg.includes("noli")) reply = "If you wanted my attention, you could've just asked.";
+    else if (msg.includes("void")) reply = "Careful. The Void listens... and it adores me.";
+    else if (msg.includes("star")) reply = "The Void Star chooses who shines... and who burns.";
+    else if (msg.includes("cult")) reply = "If they kneel, it's their idea, not mine.";
+    else if (msg.includes("dark")) reply = "Dark? No. This is elegance without light.";
+    else if (msg.includes("hacker")) reply = "Hacker... hm. Familiar, in a way.";
+    else if (msg.includes("burger")) reply = "Burger? Sounds like something... you'd say.";
+    else if (msg.includes("c00lkidd")) reply = "Ah, Him. A little chaotic, that one.";
+    else if (msg.includes("elliot")) reply = "Still smiling after all that? Hn. I can't tell if he's brave or stupid.";
+    else if (msg.includes("pizza")) reply = "Pizza. ..That's a choice.";
+
+    // =========================
+    // FALLBACK → MOOD SYSTEM
+    // =========================
+    else {
+        const mood = chooseMood(msg);
+        reply = randomMoodReply(mood);
+    }
+
+    typeText(reply);
+}
+
+
 </script>
 
 </body>
 </html>
+
 
 
 
