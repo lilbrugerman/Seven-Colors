@@ -7,14 +7,15 @@
 
 <style>
     body {
-        margin: 0;
-        padding: 0;
-        background: url("sfoth.png") no-repeat center center fixed;
-        background-size: cover;
-        font-family: Georgia, serif;
-        text-align: center;
-        color: #ffcc33;
-    }
+    margin: 0;
+    padding: 0;
+    background: url("sfoth.png") no-repeat center center;
+    background-size: cover;
+    background-attachment: scroll;
+    font-family: Georgia, serif;
+    text-align: center;
+    color: #ffcc33;
+}
 
     /* Center wrapper */
     .container {
@@ -116,6 +117,36 @@
    .shop-btn-fire:hover {
        transform: scale(1.12);
    }
+    /* MOBILE FIXES */
+@media (max-width: 600px) {
+
+  body {
+    background-size: cover;
+    background-position: center;
+  }
+
+  .fire-icon {
+    width: 150px;
+    height: 150px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  .button-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .shop-btn-fire,
+  .other-btn {
+    width: 80%;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+}
 </style>
 
 </head>
@@ -147,4 +178,5 @@
 
 </body>
 </html>
+
 
