@@ -605,7 +605,6 @@ function modalAddToCart(id, unitPrice){
   saveCart();
   showToast(`${p.title} added to ur list (${qty})`);
   closeVarModal();
-}
 
 /* ========== CART FUNCTIONS ========== */
 function saveCart(){ localStorage.setItem('mini_cart_v1', JSON.stringify(cart)); updateCartUI(); }
@@ -692,6 +691,7 @@ document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ document.getEl
 </script>
 </body>
 </html>
+
 
 
 
