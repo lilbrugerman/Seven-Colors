@@ -60,7 +60,7 @@ cart.forEach(item => {
 subtotalEl.textContent = `Rp ${subtotal.toLocaleString("id-ID")}`;
 
 function calculateOngkir() {
-    const address = document.getElementById("alamatLengkap").value.trim();
+    const address = document.getElementById("alamat").value.trim();
     if (!address) return 5000; // default 5k
 
     const userLoc = dummyGeocode(address);
@@ -108,6 +108,7 @@ document.getElementById("btnPlaceOrder").addEventListener("click", () => {
     window.location.href = "success.html";
   }, 200);
 });
+
 
 
 
