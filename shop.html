@@ -602,20 +602,11 @@ function modalAddToCart(id, unitPrice){
     alert("+1 to ur cart xp - n7");
 }
 
-  cart.push({
-    id:p.id,
-    title:p.title,
-    price:unitPrice,
-    qty:qty,
-    image:p.image,
-    variant: variantLabels
-  });
-
   saveCart();
   showToast(`${p.title} added to ur list (${qty})`);
   closeVarModal();
 }
-}
+
 /* ========== CART FUNCTIONS ========== */
 function saveCart(){ localStorage.setItem('mini_cart_v1', JSON.stringify(cart)); updateCartUI(); }
 
@@ -701,6 +692,7 @@ document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ document.getEl
 </script>
 </body>
 </html>
+
 
 
 
