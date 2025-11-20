@@ -117,53 +117,28 @@
    .shop-btn-fire:hover {
        transform: scale(1.12);
    }
-   /* MOBILE FIXES */
+    
+   /* --- MOBILE FIX FOR BACKGROUND --- */
 @media (max-width: 600px) {
+    body {
+        background-size: cover !important;   /* biar nggak zoom aneh */
+        background-attachment: scroll !important; /* matiin fixed di HP */
+        background-position: center top !important; /* background lebih rapi */
+    }
 
-  body {
-    overflow-x: hidden;
-    background-size: cover;
-    background-position: center;
-  }
+    #avatar {
+        width: 180px !important;
+        height: 180px !important;
+    }
 
-  .container {
-    margin-top: 20px;
-    width: 100%;
-  }
+    h1 {
+        font-size: 2rem !important;
+    }
 
-  .fire-icon {
-    width: 150px;
-    height: 150px;
-  }
-
-  h1 {
-    font-size: 1.8rem;
-    margin: 15px 0;
-    padding: 0 10px;
-  }
-
-  /* Make buttons go vertical */
-  .buttons {
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-    align-items: center;
-  }
-
-  /* Adjust each button size */
-  .btn-box {
-    width: 75%;
-    max-width: 300px;
-    height: 90px;
-    font-size: 22px;
-  }
-
-  /* SHOP fire button stays responsive */
-  .shop-btn-fire {
-    width: 75%;
-    max-width: 300px;
-    height: 90px;
-  }
+    .menu-button {
+        transform: scale(1.2); /* tombol lebih gede */
+        margin: 20px auto;
+    }
 }
 </style>
 
@@ -196,6 +171,7 @@
 
 </body>
 </html>
+
 
 
 
