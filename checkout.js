@@ -82,8 +82,6 @@ function updateTotal() {
         "Rp " + ongkir.toLocaleString("id-ID");
 }
 
-updateTotal();
-
 totalAkhirEl.textContent = `Rp ${(subtotal + ongkir).toLocaleString("id-ID")}`;
 
 // --- ORDER BUTTON ---
@@ -98,7 +96,7 @@ document.getElementById("btnPlaceOrder").addEventListener("click", () => {
         return; // stop order
     }
 
-    alert("yay u spent ur money on smth 🤸‍♀️💳");
+    alert("yay u spent ur money on smth 🎭🍔");
 
   // Clear cart
   localStorage.removeItem("mini_cart_v1");
@@ -108,6 +106,7 @@ document.getElementById("btnPlaceOrder").addEventListener("click", () => {
     window.location.href = "success.html";
   }, 200);
 });
+
 
 
 
