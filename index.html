@@ -185,16 +185,40 @@
         <a href="shop.html">
             <div class="btn-box shop-btn-fire">SHOP</div>
         </a>
-
-        <a href="https://youtu.be/olVgIySUf-k?si=8L0czcElgZhDfNHR">
-            <div class="btn-box">(=｀ω´=)</div>
+https://youtu.be/olVgIySUf-k?si=8L0czcElgZhDfNHR   (=｀ω´=)
+        <a href="#" onclick="launchGremlinVideo()">
+            <div class="btn-box">(= ᴡ =)</div>
         </a>
     </div>
 
 </div>
 
+<script>
+// ------------------------
+// RANDOM GREMLIN VIDEO POOL
+// ------------------------
+const gremlinVideos = [
+    "https://youtu.be/olVgIySUf-k?si=8L0czcElgZhDfNHR",
+    "https://youtu.be/qQlVtAiFARI?si=2sl-9DLQMkpCmYhI",
+    "https://youtu.be/rqXlYY88t6w?si=xQVW2q-WpOshpGeH",
+    "https://youtu.be/v35t8qKREdQ?si=gly-NnEs9kNc9fDP",
+    "https://youtu.be/5FY0kpC-150?si=ak_9pCB0XQBDM6iW",
+    "https://youtu.be/0iVlSNpq8i8?si=6FFfN77JF2f3HqTv"
+];
+
+// ------------------------
+// GREMLIN LINK LAUNCHER
+// ------------------------
+function launchGremlinVideo() {
+    const randomIndex = Math.floor(Math.random() * gremlinVideos.length);
+    const url = gremlinVideos[randomIndex];
+    window.open(url, "_blank");
+}
+</script>
+
 </body>
 </html>
+
 
 
 
