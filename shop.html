@@ -597,10 +597,8 @@ function modalAddToCart(id, unitPrice) {
 
     // --- SAVE TO LOCALSTORAGE ---
    cart.push(cartItem);
-  
     saveCart()
     updateCartUI ();
-  
     showToast(`${cartItem.title} added to ur list (${qty})`);
     closeVarModal();
 }
@@ -693,6 +691,7 @@ document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ document.getEl
 </script>
 </body>
 </html>
+
 
 
 
