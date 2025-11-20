@@ -588,10 +588,11 @@ function modalAddToCart(id, unitPrice){
     // --- CREATE CART ITEM ---
     const cartItem = {
         id: p.id,
-        name: p.name,                        // ✔ FIXED: Add product name
-        price: unitPrice,                    // correctly store unit price
+        title: p.title,                  // ✔ FIXED NAME (you used p.name = undefined)
+        price: unitPrice,
         qty: qty,
-        variants: variantLabels              // store selected variants
+        image: p.image,
+        variant: variantLabels
     };
 
     // --- SAVE TO LOCALSTORAGE ---
@@ -599,12 +600,12 @@ function modalAddToCart(id, unitPrice){
     cart.push(cartItem);
     localStorage.setItem("mini_cart_v1", JSON.stringify(cart));
 
-    alert("+1 to ur cart xp - n7");
+    // --- CORRECT ACTIONS ---
+    saveCart();
+    showToast(`${p.title} added to ur list (${qty})`);
+    closeVarModal();
 }
 
-  saveCart();
-  showToast(`${p.title} added to ur list (${qty})`);
-  closeVarModal();
 
 /* ========== CART FUNCTIONS ========== */
 function saveCart(){ localStorage.setItem('mini_cart_v1', JSON.stringify(cart)); updateCartUI(); }
@@ -691,6 +692,7 @@ document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ document.getEl
 </script>
 </body>
 </html>
+
 
 
 
