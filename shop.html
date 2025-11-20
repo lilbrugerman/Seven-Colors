@@ -366,7 +366,7 @@ const productsData = [
 ];
 
 /* ========== STATE ========== */
-let cart = JSON.parse(localStorage.getItem('mini_cart_vl')||'[]');
+let cart = JSON.parse(localStorage.getItem('mini_cart_v1')||'[]');
 let categories = [...new Set(productsData.map(p=>p.category))];
 
 /* ========== HELPERS ========== */
@@ -697,6 +697,7 @@ document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ document.getEl
 </script>
 </body>
 </html>
+
 
 
 
