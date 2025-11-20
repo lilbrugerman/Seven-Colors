@@ -96,39 +96,35 @@
   a.back:hover {
     opacity: .7;
   }
-  /* --- MOBILE RESPONSIVE FIX --- */
+ 
+  /* --- MOBILE RESPONSIVE FIX (REAL VERSION) --- */
 @media (max-width: 600px) {
 
-  body {
-    zoom: 1; /* biar nggak ngecil sendiri */
+  .wrapper {
+    width: 95%;
+    padding: 0 10px;
   }
 
-  .profile-container,
-  .card,
-  .wrapper,
-  .bio-box,
-  .avatar-box,
-  .content-box {
-    width: 90% !important;  /* BIKIN LEBAR DI HP */
-    max-width: 90% !important;
-    margin: 0 auto;
+  .pfp {
+    width: 160px;
+    height: 160px;
+    border-width: 2px;
+    box-shadow: 0 0 12px #c38bff;
   }
 
-  img {
-    width: 150px !important;   /* avatar jadi gede di HP */
-    height: auto;
+  .name {
+    font-size: 26px;
   }
 
-  h1, h2, h3 {
-    font-size: 1.6rem !important;   /* teks judul lebih besar */
+  .box {
+    width: 95%;
+    padding: 15px;
+    max-height: none;
+    font-size: 16px;
   }
 
-  p {
-    font-size: 1.1rem !important;   /* bio lebih mudah dibaca */
-  }
-
-  .bio-text {
-    padding: 15px !important;
+  a.back {
+    font-size: 18px;
   }
 }
 </style>
@@ -211,4 +207,5 @@ animate();
 
 </body>
 </html>
+
 
