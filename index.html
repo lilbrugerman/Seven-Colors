@@ -467,7 +467,7 @@ function handleAddClick(id){
       variant:{}
     });
     saveCart();
-    showToast(`${p.title} ditambahkan (${qty})`);
+    showToast(`${p.title} added to ur list (${qty})`);
   }
 }
 
@@ -593,12 +593,12 @@ function modalAddToCart(id, unitPrice){
   });
 
   saveCart();
-  showToast(`${p.title} ditambahkan (${qty})`);
+  showToast(`${p.title} added to ur list (${qty})`);
   closeVarModal();
 }
 
 /* ========== CART FUNCTIONS ========== */
-function saveCart(){ localStorage.setItem('mini_cart_final', JSON.stringify(cart)); updateCartUI(); }
+function saveCart(){ localStorage.setItem('mini_cart_v1', JSON.stringify(cart)); updateCartUI(); }
 
 function updateCartUI(){
   const list = document.getElementById('cartItemsList'); list.innerHTML = '';
@@ -633,7 +633,7 @@ function changeQty(index, val){
   const q = Math.max(1, parseInt(val)||1);
   if(cart[index]){ cart[index].qty = q; saveCart(); }
 }
-function removeItem(index){ cart.splice(index,1); saveCart(); showToast('Produk dihapus'); }
+function removeItem(index){ cart.splice(index,1); saveCart(); showToast('i hacked ur item its no longer exist xp'); }
 function clearCart(){ if(!confirm('clear ur cart?')) return; cart = []; saveCart(); showToast('ok done go shop'); }
 
 function openSideCart(){ document.getElementById('sideCart').classList.add('open'); document.getElementById('sideCart').setAttribute('aria-hidden','false'); updateCartUI(); }
@@ -682,6 +682,7 @@ document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ document.getEl
 </script>
 </body>
 </html>
+
 
 
 
