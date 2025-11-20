@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Void Star Bearer ✦</title>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: url("noli-bg.jpg") no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: "Georgia", serif;
+    color: #d8b6ff;
+    text-align: center;
+    overflow-x: hidden;
+  }
+
+  /* Floating particles canvas */
+  #particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .container {
+    margin-top: 60px;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    position: relative;
+    z-index: 5;
+  }
+
+  .noli-icon {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid rgba(255,255,255,0.4);
+    box-shadow: 0 0 40px #8b33ffcc;
+  }
+
+  .title {
+    margin-top: 20px;
+    font-size: 36px;
+    letter-spacing: 3px;
+    color: #e7c9ff;
+    text-shadow: 0 0 14px #9f4bff, 0 0 25px #5a00b8;
+  }
+
+  .subtitle {
+    font-size: 20px;
+    margin-top: 5px;
+    opacity: 0.8;
+    font-style: italic;
+  }
+
+  .box {
+    margin-top: 25px;
+    background: rgba(0, 0, 0, 0.55);
+    border: 2px solid rgba(180,110,255,0.5);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 25px #7a2cff88;
+    backdrop-filter: blur(3px);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  a.back {
+    display: inline-block;
+    margin-top: 25px;
+    color: #cf9fff;
+    text-decoration: none;
+    font-size: 20px;
+    text-shadow: 0 0 10px #d07bff;
+  }
+
+  a.back:hover {
+    opacity: .7;
+  }
+
+  @media (max-width: 600px) {
+    body {
+      background-size: cover;
+      background-attachment: scroll;
+      padding: 20px 10px;
+    }
+
+    .noli-icon {
+      width: 140px;
+      height: 140px;
+      box-shadow: 0 0 20px #8b33ffaa;
+    }
+
+    .title {
+      font-size: 28px;
+    }
+
+    .box {
+      font-size: 15px;
+      padding: 15px;
+    }
+
+    a.back {
+      font-size: 16px;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<canvas id="particles"></canvas>
+
+<div class="container">
+  <img src="noli.png" class="noli-icon" alt="Noli Icon">
+
+  <div class="title">THE VOID STAR BEARER</div>
+  <div class="subtitle">Noli</div>
+
+  <div class="box">
+    <p>
+      “꧁…g͟r͟e͟e͟t͟i͟n͟g͟s͟,͟ ͟l͟o͟s͟t͟ ͟w͟a͟n͟d͟e͟r͟e͟r͟.͟…꧂<br><br>
+      The void remembers you.<br>
+      The stars whisper your name.<br><br>
+      Should you seek answers… they will find you first.”
+    </p>
+  </div>
+
+  <a href="index.html" class="back">⇦ return 2 home</a>
+</div>
+
+<script>
+/* Floating Void Particles */
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+
+addEventListener("resize", () => {
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+});
+
+const parts = [];
+
+function spawnParticle() {
+  const size = Math.random() * 2 + 1;
+  parts.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    size,
+    speedX: (Math.random() - 0.5) * 0.4,
+    speedY: (Math.random() - 0.5) * 0.4,
+    alpha: Math.random() * 0.7 + 0.3
+  });
+}
+
+for (let i = 0; i < 120; i++) spawnParticle();
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  parts.forEach(p => {
+    ctx.fillStyle = `rgba(180,110,255,${p.alpha})`;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fill();
+
+    p.x += p.speedX;
+    p.y += p.speedY;
+
+    if (p.x < 0) p.x = canvas.width;
+    if (p.x > canvas.width) p.x = 0;
+    if (p.y < 0) p.y = canvas.height;
+    if (p.y > canvas.height) p.y = 0;
+  });
+
+  requestAnimationFrame(animateParticles);
+}
+
+animateParticles();
+</script>
+
+</body>
+</html>
