@@ -73,13 +73,25 @@ function calculateOngkir() {
 }
 
 function updateTotal() {
-    const ongkir = calculateOngkir();
 
-    totalAkhirEl.textContent =
-        "Rp " + (subtotal + ongkir).toLocaleString("id-ID");
+    // --- Recalculate subtotal every time ---
+    let subtotal = 0;
+    cart.forEach(item => {
+        let price = parseInt(item.price.toString().replace(/\D/g, ""));
+        subtotal += price * item.qty;
+    });
+
+    // --- Calculate ongkir based on latest subtotal ---
+    let ongkir = calculateOngkir(subtotal);
+
+    document.getElementById("subtotalValue").textContent =
+        "Rp " + subtotal.toLocaleString("id-ID");
 
     document.getElementById("ongkirValue").textContent =
         "Rp " + ongkir.toLocaleString("id-ID");
+
+    document.getElementById("totalAkhir").textContent =
+        "Rp " + (subtotal + ongkir).toLocaleString("id-ID");
 }
 
   updateTotal()
