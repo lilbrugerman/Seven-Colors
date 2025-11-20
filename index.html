@@ -118,28 +118,49 @@
        transform: scale(1.12);
    }
     
-   /* --- MOBILE FIX FOR BACKGROUND --- */
-@media (max-width: 600px) {
-    body {
-        background-size: cover !important;   /* biar nggak zoom aneh */
-        background-attachment: scroll !important; /* matiin fixed di HP */
-        background-position: center top !important; /* background lebih rapi */
-    }
+  /* MOBILE FIX — FULL SOLUTION */
+   @media (max-width: 600px) {
+       body {
+           background-size: cover !important;
+           background-position: center top !important;
+           background-attachment: scroll !important;
+           padding: 20px 10px;
+       }
 
-    #avatar {
-        width: 180px !important;
-        height: 180px !important;
-    }
+       /* Center container */
+       .container {
+           width: 95%;
+           margin: 20px auto;
+       }
 
-    h1 {
-        font-size: 2rem !important;
-    }
+       /* Smaller fire icon */
+       .fire-icon {
+           width: 160px !important;
+           height: 160px !important;
+           padding: 6px;
+       }
 
-    .menu-button {
-        transform: scale(1.2); /* tombol lebih gede */
-        margin: 20px auto;
-    }
-}
+       /* Title */
+       h1 {
+           font-size: 1.8rem !important;
+           margin-top: 15px;
+       }
+
+       /* Buttons stacked vertically */
+       .buttons {
+           flex-direction: column !important;
+           gap: 20px !important;
+           margin-top: 30px;
+       }
+
+       .btn-box {
+           width: 90% !important;
+           height: auto !important;
+           padding: 20px 0;
+           font-size: 22px !important;
+           margin: 0 auto;
+       }
+   }
 </style>
 
 </head>
@@ -171,6 +192,7 @@
 
 </body>
 </html>
+
 
 
 
