@@ -574,16 +574,33 @@ function updateModalPrice(){
 }
 
 function modalAddToCart(id, unitPrice){
-  const p = productsData.find(x=>x.id===id);
-  if(!p) return;
+    const p = productsData.find(x => x.id === id);
+    if (!p) return;
 
-  const qty = modalState.qty;
-  const variantLabels = {};
+    const qty = modalState.qty;
 
-  Object.keys(modalState.selected).forEach(key=>{
-    const opt = modalState.selected[key];
-    variantLabels[key] = typeof opt === 'string' ? opt : opt.name;
-  });
+    const variantLabels = {};
+    Object.keys(modalState.selected).forEach(key => {
+        const opt = modalState.selected[key];
+        variantLabels[key] = typeof opt === 'string' ? opt : opt.name;
+    });
+
+    // --- CREATE CART ITEM ---
+    const cartItem = {
+        id: p.id,
+        name: p.name,                        // ✔ FIXED: Add product name
+        price: unitPrice,                    // correctly store unit price
+        qty: qty,
+        variants: variantLabels              // store selected variants
+    };
+
+    // --- SAVE TO LOCALSTORAGE ---
+    let cart = JSON.parse(localStorage.getItem("mini_cart_v1")) || [];
+    cart.push(cartItem);
+    localStorage.setItem("mini_cart_v1", JSON.stringify(cart));
+
+    alert("+1 to ur cart xp - n7");
+}
 
   cart.push({
     id:p.id,
@@ -684,6 +701,7 @@ document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ document.getEl
 </script>
 </body>
 </html>
+
 
 
 
