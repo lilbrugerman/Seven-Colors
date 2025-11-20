@@ -522,12 +522,20 @@ const moodReplies = {
         "You know I can hear your heartbeat, right?"
     ],
 
-    remembrance: [
+     remembrance: [
         "..That brings back shadows.",
         "...You sounded like him for a second.",
         "You almost said it like Se- never mind.",
         "It almost felt like he was here again.",
         "...Don't repeat that. It sounded too much like the day he left."
+    ]
+      
+    flabbergasted: [
+        "..I- excuse me? What did you just call that abomination of letters?",
+        "No. No. Erase that. I refuse to acknowledge whatever.. that is.",
+        "I- I am NOT involved in whatever nonsense you're imagining.",
+        "If you wanted to stun me into silence- congratulations.",
+        "No. Absolutely not. Next question."
     ]
 };
 
@@ -570,6 +578,20 @@ function chooseMood(msg) {
         return "greeting";
     }
 
+ if (
+        msg.includes("77noli") ||
+        msg.includes("7n7noli") ||
+        msg.includes("noli7n7") ||
+        msg.includes("noli77") ||
+        msg.includes("voidburger") ||
+        msg.includes("voidpizzaburger") ||
+        msg.includes("🍔🎭") ||
+        msg.includes("🎭🍔") ||
+        msg.includes("youburnedmypizzeriasoibangedyoursitationship")
+    ) {
+        return "flabbergasted";
+    }
+ 
     // FLIRTY
     if (
         msg.includes("cute") ||
@@ -577,6 +599,7 @@ function chooseMood(msg) {
         msg.includes("handsome") ||
         msg.includes("love") ||
         msg.includes("kiss") ||
+        msg.includes("dear") ||
         msg.includes("heart")
     ) {
         return "flirty";
@@ -748,6 +771,7 @@ if (
 
 </body>
 </html>
+
 
 
 
