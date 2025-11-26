@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>E-Store — Home</title>
+
+<!-- Optional: Google font (works if online) -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#ffffff;
+    --muted:#6b7280;
+    --accent:#ef476f;    /* main pink/red accent like template */
+    --accent-2:#ff8a65;  /* secondary warm */
+    --card:#fafafa;
+    --text:#111827;
+    --max-width:1200px;
+  }
+
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial; background:var(--bg); color:var(--text);-webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale}
+  a{color:inherit;text-decoration:none}
+
+  /* ---------- NAV ---------- */
+  .nav{
+    max-width:var(--max-width);
+    margin:20px auto;
+    padding:0 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .brand{
+    font-weight:800;
+    letter-spacing:0.6px;
+    font-size:20px;
+  }
+  .nav-right{display:flex;gap:16px;align-items:center}
+  .nav-right a{padding:8px 12px;border-radius:8px;font-weight:600;color:var(--text)}
+  .nav-right .ctab{background:var(--accent);color:white;box-shadow:0 8px 30px rgba(239,71,111,0.12)}
+
+  /* ---------- HERO ---------- */
+  .hero-wrap{max-width:var(--max-width);margin:12px auto 0;padding:24px;position:relative}
+  .hero{
+    display:flex;
+    gap:28px;
+    align-items:center;
+    background:linear-gradient(180deg,#fff 0%, #fcfcfc 100%);
+    border-radius:14px;
+    padding:44px;
+    box-shadow:0 12px 40px rgba(16,24,40,0.06);
+    overflow:visible;
+  }
+
+  .hero-left{flex:1;min-width:260px}
+  .eyebrow{display:inline-block;font-weight:700;color:var(--accent);padding:6px 10px;border-radius:999px;font-size:13px;background:rgba(239,71,111,0.06)}
+  .hero h1{font-size:44px;margin:18px 0 8px;line-height:1.02;font-weight:800}
+  .hero p{color:var(--muted);font-size:16px;margin:0 0 18px}
+  .hero-ctas{display:flex;gap:12px;align-items:center}
+  .btn{padding:12px 18px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
+  .btn-primary{background:var(--accent);color:white;box-shadow:0 10px 30px rgba(239,71,111,0.12)}
+  .btn-ghost{background:transparent;border:1px solid #eee;color:var(--text)}
+
+  .hero-right{width:440px;display:flex;align-items:center;justify-content:center}
+  .hero-card{
+    width:420px;height:320px;border-radius:12px;overflow:hidden;background:#fff;position:relative;
+    box-shadow:0 14px 40px rgba(16,24,40,0.08);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .hero-card img{width:100%;height:100%;object-fit:cover;display:block}
+
+  /* decorative play badge */
+  .play-badge{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:86px;height:86px;border-radius:50%;background:rgba(17,24,39,0.7);display:flex;align-items:center;justify-content:center;color:white;font-size:28px;box-shadow:0 12px 30px rgba(17,24,39,0.28)}
+  .play-badge:after{content:'';position:absolute;left:0;top:0;right:0;bottom:0;border-radius:50%;box-shadow:0 0 40px rgba(239,71,111,0.14) inset}
+
+  /* ---------- WAVY DIVIDER (SVG alternative) ---------- */
+  .wave{margin-top:28px}
+  .wave svg{display:block;width:100%;height:80px}
+
+  /* ---------- PROMO STRIP ---------- */
+  .promo{
+    max-width:var(--max-width);margin:0 auto;padding:28px 24px;display:flex;align-items:center;gap:18px;justify-content:space-between;
+  }
+  .promo-card{flex:1;background:#fff;border-radius:12px;padding:18px;box-shadow:0 10px 30px rgba(16,24,40,0.04);display:flex;align-items:center;gap:18px}
+  .promo-card img{width:160px;height:100px;object-fit:cover;border-radius:8px}
+  .promo-card .meta h3{margin:0;font-size:18px}
+  .promo-card .meta p{margin:6px 0 0;color:var(--muted)}
+
+  /* ---------- PRODUCTS GRID ---------- */
+  .container{max-width:var(--max-width);margin:26px auto;padding:0 20px}
+  .section-title{display:flex;align-items:end;justify-content:space-between}
+  .section-title h2{margin:0;font-size:20px}
+  .products{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:18px;margin-top:18px}
+  .card{
+    background:#fff;border-radius:12px;padding:14px;box-shadow:0 8px 30px rgba(16,24,40,0.04);display:flex;flex-direction:column;gap:10px;
+  }
+  .card img{width:100%;height:160px;object-fit:cover;border-radius:8px}
+  .card .title{font-weight:700;font-size:14px}
+  .card .desc{font-size:13px;color:var(--muted)}
+  .card .row{display:flex;justify-content:space-between;align-items:center;margin-top:auto}
+  .price{font-weight:800;color:var(--accent)}
+  .addbtn{padding:8px 10px;border-radius:8px;border:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;cursor:pointer;font-weight:700}
+
+  /* ---------- FOOTER ---------- */
+  footer{max-width:var(--max-width);margin:40px auto 80px;padding:20px;text-align:center;color:var(--muted);font-size:14px}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:980px){
+    .hero{flex-direction:column;padding:30px}
+    .hero-right{width:100%}
+    .hero-card{width:100%;height:260px}
+    .hero-left{max-width:100%}
+  }
+  @media (max-width:520px){
+    .nav{padding:12px}
+    .hero h1{font-size:28px}
+    .hero p{font-size:14px}
+    .hero-card{height:200px}
+    .promo{flex-direction:column;gap:12px}
+    .promo-card img{width:120px;height:80px}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="brand">E-Store</div>
+  <div class="nav-right">
+    <a href="aboutme.html">About</a>
+    <a class="ctab" href="shop.html">Shop</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero-wrap">
+  <section class="hero" aria-label="Hero">
+    <div class="hero-left">
+      <div class="eyebrow">HUGE SAVINGS</div>
+      <h1>HUGE SAVINGS ON SHOES</h1>
+      <p>Flash deals, limited stock — get your favorites before they're gone. Free shipping on selected items.</p>
+      <div class="hero-ctas">
+        <button class="btn btn-primary" onclick="location.href='shop.html'">Shop Now</button>
+        <button class="btn btn-ghost" onclick="document.querySelector('.promo').scrollIntoView({behavior:'smooth'})">See Promo</button>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-card">
+        <!-- Replace image below with your hero image (HD) -->
+        <img src="https://images.unsplash.com/photo-1526178615459-1f6f3fdc8df5?q=80&w=1400&auto=format&fit=crop" alt="hero product" />
+        <div class="play-badge">▶</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- wave SVG -->
+  <div class="wave" aria-hidden="true">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,40 C200,80 400,0 720,40 C1040,80 1240,0 1440,40 L1440 80 L0 80 Z" fill="#fff"></path>
+    </svg>
+  </div>
+</div>
+
+<!-- PROMO STRIP -->
+<section class="promo">
+  <div class="promo-card">
+    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800&auto=format&fit=crop" alt="promo">
+    <div class="meta">
+      <h3>Flash Store — Big Sale</h3>
+      <p>Seasonal 50% off selected items. Limited time only — shop the bestsellers now.</p>
+    </div>
+  </div>
+
+  <div style="width:300px;text-align:right">
+    <small style="color:var(--muted)">Free shipping on orders over $50</small>
+    <div style="margin-top:8px"><button class="btn btn-primary" onclick="location.href='shop.html'">Shop Deals</button></div>
+  </div>
+</section>
+
+<!-- FEATURED PRODUCTS -->
+<main class="container" role="main">
+  <div class="section-title">
+    <h2>New Arrivals</h2>
+    <a href="shop.html" style="color:var(--accent);font-weight:700">View all →</a>
+  </div>
+
+  <div class="products" id="productsGrid">
+    <!-- Example product cards (replace src & text with your real products or let your shop.html handle listing) -->
+    <article class="card">
+      <img src="https://images.unsplash.com/photo-1528701800489-5647f7b50c21?q=80&w=1200&auto=format&fit=crop" alt="product">
+      <div class="title">Classic Sneaker</div>
+      <div class="desc">Comfortable everyday sneakers.</div>
+      <div class="row">
+        <div class="price">$29.99</div>
+        <button class="addbtn" onclick="location.href='shop.html'">Add</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <img src="https://images.unsplash.com/photo-1600180758890-9b3f1b35b3e1?q=80&w=1200&auto=format&fit=crop" alt="product">
+      <div class="title">Casual Loafers</div>
+      <div class="desc">Smart-casual loafers for outings.</div>
+      <div class="row">
+        <div class="price">$39.99</div>
+        <button class="addbtn" onclick="location.href='shop.html'">Add</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1200&auto=format&fit=crop" alt="product">
+      <div class="title">Sport Runner</div>
+      <div class="desc">Lightweight running shoes.</div>
+      <div class="row">
+        <div class="price">$19.99</div>
+        <button class="addbtn" onclick="location.href='shop.html'">Add</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <img src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?q=80&w=1200&auto=format&fit=crop" alt="product">
+      <div class="title">Elegant Heels</div>
+      <div class="desc">Elegant heels for special occasions.</div>
+      <div class="row">
+        <div class="price">$49.99</div>
+        <button class="addbtn" onclick="location.href='shop.html'">Add</button>
+      </div>
+    </article>
+  </div>
+</main>
+
+<footer>
+  © <strong>E-Store</strong> • Made with ❤️
+</footer>
+
+<!-- Gremlin Easter egg (kept) -->
+<script>
+  const gremlinVideos = [
+    "https://youtu.be/olVgIySUf-k?si=8L0czcElgZhDfNHR",
+    "https://youtu.be/qQlVtAiFARI?si=2sl-9DLQMkpCmYhI",
+    "https://youtu.be/rqXlYY88t6w?si=xQVW2q-WpOshpGeH",
+    "https://youtu.be/v35t8qKREdQ?si=gly-NnEs9kNc9fDP",
+    "https://youtu.be/5FY0kpC-150?si=ak_9pCB0XQBDM6iW",
+    "https://youtu.be/0iVlSNpq8i8?si=6FFfN77JF2f3HqTv",
+    "https://www.youtube.com/watch?v=ZuifkacZ0TA",
+    "https://youtu.be/G_JfKOjwzwo?si=RC0OnDUCAKMPR04o",
+    "https://youtu.be/XfTWgMgknpY?si=PnvkQF9OJMCOzFMA",
+    "https://youtu.be/D_qiWvjJ3kk?si=lGWVq15CFXuQCmzB"
+  ];
+  function launchGremlinVideo(){
+    const i = Math.floor(Math.random()*gremlinVideos.length);
+    window.open(gremlinVideos[i], "_blank");
+  }
+</script>
+
+</body>
+</html>
